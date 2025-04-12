@@ -15,7 +15,7 @@ Route::get('/employee/login', function () {
 // Handle login form submission (to be created later)
 Route::post('/employee/login', [App\Http\Controllers\EmployeeLoginController::class, 'login'])->name('employee.login.submit');
 
-Route::get('/employee/admindashboard', function () {
+Route::get('/admin/admindashboard', function () {
     return view('admindashboard');
 })->name('admindashboard');
 
@@ -31,6 +31,16 @@ Route::get('/admin/departments', function () {
     return view('departments');
 })->name('admin.departments');
 
+Route::get('/admin/create-department', function () {
+    return view('createdepartment');
+})->name('admin.create_department');
+
+Route::get('/admin/manage-department', function () {
+    return view('managedepartment');
+})->name('admin.manage_department');
+
+
+
 // Leave Types
 Route::get('/admin/leave-types', function () {
     return view('leave_types');
@@ -40,6 +50,10 @@ Route::get('/admin/leave-types', function () {
 Route::get('/admin/employees', function () {
     return view('employees');
 })->name('admin.employees');
+
+Route::get('/admin/add-employee', function () {
+    return view('addemployee');
+})->name('admin.add_employee');
 
 // Salary Management
 Route::get('/admin/salary-management', function () {
@@ -65,3 +79,5 @@ Route::get('/admin/notifications', function () {
 Route::get('/admin/settings', function () {
     return view('settings');
 })->name('admin.settings');
+
+

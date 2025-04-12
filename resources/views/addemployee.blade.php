@@ -14,21 +14,74 @@
      <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     
      <style>
-    .card-header {
-    font-weight: bold;
-    font-size: 1.1rem;
-}
+    /* Page Container */
+    #content {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-.table th, .table td {
-    vertical-align: middle;
-}
+    /* Form Title */
+    h3 {
+        font-family: 'Arial', sans-serif;
+        color: #333;
+        font-weight: bold;
+    }
 
-h2 {
-    font-weight: 600;
-    color: #343a40;
-}
+    /* Input Fields */
+    .form-control {
+        border-radius: 6px;
+        padding: 12px;
+        font-size: 1.1rem;
+    }
 
+    .form-control-lg {
+        font-size: 1.2rem;
+    }
+
+    /* Form Button */
+    .btn {
+        border-radius: 6px;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    /* Column Spacing */
+    .row {
+        margin-bottom: 15px;
+    }
+
+    /* Footer */
+    footer p {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    /* Adjustments for small screens */
+    @media (max-width: 768px) {
+        .form-control {
+            font-size: 1rem;
+        }
+        
+        .btn-lg {
+            font-size: 1.1rem;
+            padding: 10px 20px;
+        }
+    }
 </style>
+
      
 </head>
 <body>
@@ -40,107 +93,63 @@ h2 {
 
 <!-- Main Content -->
 <div class="content" id="content">
-   <!-- Top Bar -->
-@include('topbar')
-
-<div class="container mt-4">
-    <h2 class="mb-4 text-center">Salary Management</h2>
-
-    <!-- Generate Payroll Form -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-header bg-primary text-white">
-            <i class="fas fa-calculator me-2"></i> Generate Payroll
-        </div>
-        <div class="card-body">
-            <form>
-                <div class="row g-3 align-items-end">
-                    <div class="col-md-4">
-                        <label for="employee" class="form-label">Select Employee</label>
-                        <select id="employee" class="form-select">
-                            <option selected disabled>Choose...</option>
-                            <option>John Doe</option>
-                            <option>Jane Smith</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-3">
-                        <label for="month" class="form-label">Pay Period</label>
-                        <input type="month" id="month" class="form-control">
-                    </div>
-
-                    <div class="col-md-3">
-                        <label for="allowances" class="form-label">Allowances</label>
-                        <input type="number" class="form-control" id="allowances" placeholder="e.g. 200.00">
-                    </div>
-
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-success w-100">
-                            <i class="fas fa-paper-plane me-1"></i> Generate
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Payroll Records Table -->
-    <div class="card shadow-sm">
-        <div class="card-header bg-secondary text-white">
-            <i class="fas fa-list me-2"></i> Payroll History
-        </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th>#</th>
-                            <th>Employee</th>
-                            <th>Pay Period</th>
-                            <th>Basic Salary</th>
-                            <th>Allowances</th>
-                            <th>Deductions</th>
-                            <th>Net Salary</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>March 2025</td>
-                            <td>$1000</td>
-                            <td>$100</td>
-                            <td>$50</td>
-                            <td>$1050</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jane Smith</td>
-                            <td>March 2025</td>
-                            <td>$900</td>
-                            <td>$150</td>
-                            <td>$20</td>
-                            <td>$1030</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Footer -->
-<footer class="mt-4 text-center">
-    <p>© 2025 Employee Management System. All rights reserved.</p>
-</footer>
-
+    <!-- Top Bar -->
+    @include('topbar')
     
-   
+    <a href="{{ route('admin.employees') }}" class="btn btn-success">
+    <i class="fas fa-arrow-left"></i> Go Back
+</a>
+    <!-- Employee Form Section -->
+    <div class="container mt-4">
+        <h3 class="text-center mb-4">Add New Employee</h3>
+        
+        <!-- Employee Form -->
+        <form method="POST" action="#">
+            @csrf  <!-- Include CSRF token for Laravel form submission security -->
+            
+            <div class="row">
+                <!-- Employee Name -->
+                <div class="col-md-6 mb-3">
+                    <label for="employee_name" class="form-label">Employee Name</label>
+                    <input type="text" class="form-control form-control-lg" id="employee_name" name="employee_name" placeholder="Enter Employee Name" required>
+                </div>
+                
+                <!-- Employee Email -->
+                <div class="col-md-6 mb-3">
+                    <label for="employee_email" class="form-label">Employee Email</label>
+                    <input type="email" class="form-control form-control-lg" id="employee_email" name="employee_email" placeholder="Enter Employee Email" required>
+                </div>
+            </div>
+            
+            <div class="row">
+                <!-- Employee Number -->
+                <div class="col-md-6 mb-3">
+                    <label for="employee_number" class="form-label">Employee Number</label>
+                    <input type="text" class="form-control form-control-lg" id="employee_number" name="employee_number" placeholder="Enter Employee Number" required>
+                </div>
+                
+                <!-- Department -->
+                <div class="col-md-6 mb-3">
+                    <label for="employee_department" class="form-label">Department</label>
+                    <input type="text" class="form-control form-control-lg" id="employee_department" name="employee_department" placeholder="Enter Department" required>
+                </div>
+            </div>
+            
+            <div class="row">
+                <!-- Submit Button -->
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-success btn-lg">Add Employee</button>
+                </div>
+            </div>
+        </form>
+    </div>
     
     <!-- Footer -->
     <footer class="mt-4 text-center">
         <p>© 2025 Employee Management System. All rights reserved.</p>
     </footer>
 </div>
+
 
 
 

@@ -1,0 +1,207 @@
+
+:root {
+    --sidebar-bg: #2c3e50;
+    --sidebar-hover: #1abc9c;
+    --topbar-bg: #009688;
+    --body-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-color: #212529;
+}
+
+[data-bs-theme="dark"] {
+    --sidebar-bg: #1a1d20;
+    --sidebar-hover: #0d6efd;
+    --topbar-bg: #212529;
+    --body-bg: #121212;
+    --card-bg: #212529;
+    --text-color: #f8f9fa;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--body-bg);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.sidebar {
+    height: 100vh;
+    background-color: var(--sidebar-bg);
+    color: white;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 0 15px;
+}
+
+.sidebar a {
+    color: white;
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    transition: all 0.3s;
+    border-radius: 5px;
+    margin: 5px 10px;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    background-color: var(--sidebar-hover);
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.topbar {
+    background-color: var(--topbar-bg);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    background-color: var(--card-bg);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-icon {
+    font-size: 2rem;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.profile-menu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    z-index: 1001;
+    display: none;
+}
+
+.profile-menu.show {
+    display: block;
+}
+
+.profile-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.profile-menu a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.theme-switch {
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    .content {
+        margin-left: 0;
+    }
+    .sidebar-toggle {
+        display: block;
+    }
+    .sidebar.show {
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .profile-section {
+        align-self: flex-end;
+    }
+}
+
+/* Chart container */
+.chart-container {
+    height: 300px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Status badge styles */
+.status-badge {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+/* Modal styles */
+.modal-content {
+    border-radius: 10px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+/* Notification badge */
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+}

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee MS Dashboard</title>
@@ -14,18 +17,53 @@
      <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     
      <style>
-    .card-header {
-    font-weight: bold;
-    font-size: 1.1rem;
+    /* General page padding */
+.container {
+    max-width: 700px;
 }
 
-.table th, .table td {
-    vertical-align: middle;
-}
-
+/* Heading styling */
 h2 {
-    font-weight: 600;
-    color: #343a40;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Card styling */
+.card {
+    border-radius: 12px;
+    border: none;
+    background-color: #f9f9f9;
+}
+
+/* Input field styling */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+/* Label styling */
+.form-label {
+    font-weight: 500;
+    color: #555;
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Footer */
+footer {
+    margin-top: 50px;
+    font-size: 0.9rem;
+    color: #777;
 }
 
 </style>
@@ -43,87 +81,35 @@ h2 {
    <!-- Top Bar -->
 @include('topbar')
 
+  <!-- Go Back Button -->
+  <a href="{{ route('admin.departments') }}" class="btn btn-success">
+    <i class="fas fa-arrow-left"></i> Go Back
+</a>
+
 <div class="container mt-4">
-    <h2 class="mb-4 text-center">Salary Management</h2>
+    <h2 class="mb-4 text-center">Add Department</h2>
 
-    <!-- Generate Payroll Form -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-header bg-primary text-white">
-            <i class="fas fa-calculator me-2"></i> Generate Payroll
-        </div>
-        <div class="card-body">
-            <form>
-                <div class="row g-3 align-items-end">
-                    <div class="col-md-4">
-                        <label for="employee" class="form-label">Select Employee</label>
-                        <select id="employee" class="form-select">
-                            <option selected disabled>Choose...</option>
-                            <option>John Doe</option>
-                            <option>Jane Smith</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-3">
-                        <label for="month" class="form-label">Pay Period</label>
-                        <input type="month" id="month" class="form-control">
-                    </div>
-
-                    <div class="col-md-3">
-                        <label for="allowances" class="form-label">Allowances</label>
-                        <input type="number" class="form-control" id="allowances" placeholder="e.g. 200.00">
-                    </div>
-
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-success w-100">
-                            <i class="fas fa-paper-plane me-1"></i> Generate
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Payroll Records Table -->
     <div class="card shadow-sm">
-        <div class="card-header bg-secondary text-white">
-            <i class="fas fa-list me-2"></i> Payroll History
-        </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th>#</th>
-                            <th>Employee</th>
-                            <th>Pay Period</th>
-                            <th>Basic Salary</th>
-                            <th>Allowances</th>
-                            <th>Deductions</th>
-                            <th>Net Salary</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>March 2025</td>
-                            <td>$1000</td>
-                            <td>$100</td>
-                            <td>$50</td>
-                            <td>$1050</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jane Smith</td>
-                            <td>March 2025</td>
-                            <td>$900</td>
-                            <td>$150</td>
-                            <td>$20</td>
-                            <td>$1030</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="card-body">
+            <form action="#" method="POST">
+                @csrf {{-- For Laravel --}}
+                <div class="mb-3">
+                    <label for="deptName" class="form-label">Department Name</label>
+                    <input type="text" class="form-control" id="deptName" name="department_name" placeholder="e.g. Human Resource">
+                </div>
+
+                <div class="mb-3">
+                    <label for="shortForm" class="form-label">Shortform</label>
+                    <input type="text" class="form-control" id="shortForm" name="shortform" placeholder="e.g. HR">
+                </div>
+
+                <div class="mb-3">
+                    <label for="deptCode" class="form-label">Department Code</label>
+                    <input type="text" class="form-control" id="deptCode" name="department_code" placeholder="e.g. HR001">
+                </div>
+
+                <button type="submit" class="btn btn-primary"><i class="fas fa-plus me-2"></i>Add Department</button>
+            </form>
         </div>
     </div>
 </div>
@@ -133,13 +119,6 @@ h2 {
     <p>© 2025 Employee Management System. All rights reserved.</p>
 </footer>
 
-    
-   
-    
-    <!-- Footer -->
-    <footer class="mt-4 text-center">
-        <p>© 2025 Employee Management System. All rights reserved.</p>
-    </footer>
 </div>
 
 
