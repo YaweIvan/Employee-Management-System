@@ -35,86 +35,124 @@
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    .form-label {
-        font-weight: 500;
-    }
 
-    .form-control, .form-select {
-        border-radius: 10px;
-    }
+    /* Employee Table Styling */
+.table th,
+.table td {
+    vertical-align: middle;
+}
 
-    .btn {
-        border-radius: 10px;
-    }
-    
+.table thead th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-warning {
+    font-weight: bold;
+}
+
+h4 {
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 600;
+}
+
+.container {
+    max-width: 100%;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
 </style>
      
 </head>
 <body>
 
 <!-- Sidebar -->
-@include('sidebar')
-    <a href="#" data-bs-toggle="modal" data-bs-target="#settingsModal"><i class="fas fa-cog me-2"></i> Settings</a>
-</div>
+
 
 <!-- Main Content -->
-<div class="content" id="content">
+
     <!-- Top Bar -->
     @include('topbar')
 
-    <!-- Table Container -->
-    <div class="container mt-4">
+    <a href="{{ route('admin.employees') }}" class="btn btn-success">
+    <i class="fas fa-arrow-left"></i> Go Back
+</a>
+    
+    <!-- Static Table of Employees -->
+    <div class="container py-4">
+        <h4 class="text-center mb-4">Employee Records</h4>
+
         <div class="table-responsive">
-            <table class="table table-bordered align-middle table-hover text-center">
-                <thead class="table-dark">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="text-center">
                     <tr>
-                        <th>SN</th>
-                        <th>EmpId</th>
-                        <th>Leave Type</th>
-                        <th>From</th>
-                        <th>To</th>
-                        <th>Submitted On</th>
-                        <th>Status</th>
+                        <th>#</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Employee ID</th>
+                        <th>City</th>
+                        <th>District</th>
+                        <th>Address</th>
+                        <th>Department</th>
+                        <th>Role</th>
                         <th>Action</th>
-                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>EMP001</td>
-                        <td>Annual Leave</td>
-                        <td>2025-04-15</td>
-                        <td>2025-04-20</td>
-                        <td>2025-04-10</td>
-                        <td>
-                            <span class="badge bg-warning text-dark">Pending</span>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-success">Approve</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-danger">Delete</button>
+                        <td class="text-center">1</td>
+                        <td>John Doe</td>
+                        <td>john.doe@example.com</td>
+                        <td>+1234567890</td>
+                        <td>EMP1032</td>
+                        <td>Kampala</td>
+                        <td>Central</td>
+                        <td>Plot 45, Main Street</td>
+                        <td>IT</td>
+                        <td>Software Developer</td>
+                        <td class="text-center">
+                            <a href="#" class="btn btn-sm btn-warning">Edit</a>
                         </td>
                     </tr>
                     <tr>
-                        <td>2</td>
-                        <td>EMP002</td>
-                        <td>Sick Leave</td>
-                        <td>2025-04-12</td>
-                        <td>2025-04-14</td>
-                        <td>2025-04-11</td>
-                        <td>
-                            <span class="badge bg-success">Approved</span>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-secondary">View</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-danger">Delete</button>
+                        <td class="text-center">2</td>
+                        <td>Sarah Kintu</td>
+                        <td>sarah.kintu@example.com</td>
+                        <td>+256778900123</td>
+                        <td>EMP1045</td>
+                        <td>Jinja</td>
+                        <td>Eastern</td>
+                        <td>Plot 17, Nile Avenue</td>
+                        <td>HR</td>
+                        <td>HR Manager</td>
+                        <td class="text-center">
+                            <a href="#" class="btn btn-sm btn-warning">Edit</a>
                         </td>
                     </tr>
-                    <!-- Add more rows as needed -->
+                    <tr>
+                        <td class="text-center">3</td>
+                        <td>Peter Okello</td>
+                        <td>peter.okello@example.com</td>
+                        <td>+256701234567</td>
+                        <td>EMP1090</td>
+                        <td>Gulu</td>
+                        <td>Northern</td>
+                        <td>Opp. Gulu Central Market</td>
+                        <td>Operations</td>
+                        <td>Field Supervisor</td>
+                        <td class="text-center">
+                            <a href="#" class="btn btn-sm btn-warning">Edit</a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -124,7 +162,6 @@
     <footer class="mt-4 text-center">
         <p>© 2025 Employee Management System. All rights reserved.</p>
     </footer>
-</div>
 
 
 

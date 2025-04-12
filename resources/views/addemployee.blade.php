@@ -14,6 +14,28 @@
      <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     
      <style>
+
+.card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+    }
+    
+    .btn {
+        border-radius: 5px;
+        padding: 8px 16px;
+        transition: all 0.3s;
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
     /* Page Container */
     #content {
         background-color: #f8f9fa;
@@ -22,64 +44,77 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    /* Form Title */
-    h3 {
-        font-family: 'Arial', sans-serif;
-        color: #333;
+    .card-section {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .card-section h5 {
+        margin-bottom: 20px;
+        color: #0d6efd;
         font-weight: bold;
+        border-bottom: 2px solid #0d6efd;
+        padding-bottom: 5px;
     }
 
-    /* Input Fields */
+    .form-label {
+        font-weight: 500;
+    }
+
+    .btn-lg {
+        padding: 10px 30px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+    }
+
     .form-control {
-        border-radius: 6px;
-        padding: 12px;
-        font-size: 1.1rem;
+        border-radius: 10px;
     }
 
-    .form-control-lg {
-        font-size: 1.2rem;
-    }
+    html[data-bs-theme='dark'] {
+    background-color: #121212;
+    color: #ffffff;
+}
 
-    /* Form Button */
-    .btn {
-        border-radius: 6px;
-        padding: 12px 25px;
-        font-size: 1.1rem;
-        transition: background-color 0.3s ease;
-    }
+html[data-bs-theme='dark'] .form-control {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border-color: #444;
+}
 
-    .btn-success {
-        background-color: #28a745;
-        border-color: #28a745;
-    }
+html[data-bs-theme='dark'] .form-control::placeholder {
+    color: #cccccc;
+}
 
-    .btn-success:hover {
-        background-color: #218838;
-        border-color: #1e7e34;
-    }
+html[data-bs-theme='dark'] .form-label {
+    color: #f1f1f1;
+}
 
-    /* Column Spacing */
-    .row {
-        margin-bottom: 15px;
-    }
+html[data-bs-theme='dark'] .card-section {
+    background-color: #1f1f1f;
+    border-color: #333;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+}
 
-    /* Footer */
-    footer p {
-        color: #666;
-        font-size: 0.9rem;
-    }
+html[data-bs-theme='dark'] #content {
+    background-color: #1c1c1c;
+    color: #ffffff;
+}
 
-    /* Adjustments for small screens */
-    @media (max-width: 768px) {
-        .form-control {
-            font-size: 1rem;
-        }
-        
-        .btn-lg {
-            font-size: 1.1rem;
-            padding: 10px 20px;
-        }
-    }
+html[data-bs-theme='dark'] .btn-success,
+html[data-bs-theme='dark'] .btn-danger {
+    color: #fff;
+    border: none;
+}
+
+html[data-bs-theme='dark'] .btn-success:hover,
+html[data-bs-theme='dark'] .btn-danger:hover {
+    filter: brightness(1.1);
+}
 </style>
 
      
@@ -101,48 +136,76 @@
 </a>
     <!-- Employee Form Section -->
     <div class="container mt-4">
-        <h3 class="text-center mb-4">Add New Employee</h3>
-        
-        <!-- Employee Form -->
-        <form method="POST" action="#">
-            @csrf  <!-- Include CSRF token for Laravel form submission security -->
-            
+    <h3 class="text-center mb-4">Add New Employee</h3>
+
+    <form method="POST" action="#">
+        @csrf
+
+        <!-- === Bio Data === -->
+        <div class="card-section">
+            <h5>Employee Bio Data</h5>
             <div class="row">
-                <!-- Employee Name -->
                 <div class="col-md-6 mb-3">
-                    <label for="employee_name" class="form-label">Employee Name</label>
-                    <input type="text" class="form-control form-control-lg" id="employee_name" name="employee_name" placeholder="Enter Employee Name" required>
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Full Name">
                 </div>
-                
-                <!-- Employee Email -->
                 <div class="col-md-6 mb-3">
-                    <label for="employee_email" class="form-label">Employee Email</label>
-                    <input type="email" class="form-control form-control-lg" id="employee_email" name="employee_email" placeholder="Enter Employee Email" required>
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" placeholder="Enter Email">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" placeholder="Enter Phone Number">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Employee ID</label>
+                    <input type="text" class="form-control" value="EMP1032" readonly>
                 </div>
             </div>
-            
+        </div>
+
+        <!-- === Address === -->
+        <div class="card-section">
+            <h5>Address Information</h5>
             <div class="row">
-                <!-- Employee Number -->
                 <div class="col-md-6 mb-3">
-                    <label for="employee_number" class="form-label">Employee Number</label>
-                    <input type="text" class="form-control form-control-lg" id="employee_number" name="employee_number" placeholder="Enter Employee Number" required>
+                    <label class="form-label">City</label>
+                    <input type="text" class="form-control" placeholder="Enter City">
                 </div>
-                
-                <!-- Department -->
                 <div class="col-md-6 mb-3">
-                    <label for="employee_department" class="form-label">Department</label>
-                    <input type="text" class="form-control form-control-lg" id="employee_department" name="employee_department" placeholder="Enter Department" required>
+                    <label class="form-label">District</label>
+                    <input type="text" class="form-control" placeholder="Enter District">
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label">Full Address</label>
+                    <textarea class="form-control" rows="3" placeholder="Enter Full Address"></textarea>
                 </div>
             </div>
-            
+        </div>
+
+        <!-- === Department & Role === -->
+        <div class="card-section">
+            <h5>Department & Role</h5>
             <div class="row">
-                <!-- Submit Button -->
-                <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-success btn-lg">Add Employee</button>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Department</label>
+                    <input type="text" class="form-control" placeholder="Enter Department">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Role/Position</label>
+                    <input type="text" class="form-control" placeholder="Enter Role">
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+
+        <!-- === Buttons === -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-success btn-lg me-3">Add Employee</button>
+            <button type="reset" class="btn btn-danger btn-lg">Cancel</button>
+        </div>
+    </form>
+</div>
+
     
     <!-- Footer -->
     <footer class="mt-4 text-center">

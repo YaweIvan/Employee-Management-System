@@ -41,10 +41,7 @@ Route::get('/admin/manage-department', function () {
 
 
 
-// Leave Types
-Route::get('/admin/leave-types', function () {
-    return view('leave_types');
-})->name('admin.leave_types');
+
 
 // Employees
 Route::get('/admin/employees', function () {
@@ -55,15 +52,31 @@ Route::get('/admin/add-employee', function () {
     return view('addemployee');
 })->name('admin.add_employee');
 
+//manageemployee
+Route::get('/admin/manage-employee', function () {
+    return view('manageemployee');
+})->name('admin.manageemployee');
+
+
 // Salary Management
 Route::get('/admin/salary-management', function () {
     return view('salary_management');
 })->name('admin.salary');
 
+
+// Leave Types
+Route::get('/admin/leave-types', function () {
+    return view('leave_types');
+})->name('admin.leave_types');
 // Leave Requests
 Route::get('/admin/leave-requests', function () {
     return view('leave_requests');
 })->name('admin.leave_requests');
+
+Route::get('/admin/add-leave', function () {
+    return view('addleave');
+})->name('admin.addleave');
+
 
 // Reports
 Route::get('/admin/reports', function () {

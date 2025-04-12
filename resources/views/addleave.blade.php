@@ -15,37 +15,98 @@
     
      <style>
     .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 1rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+    }
+    
+    .btn {
+        border-radius: 5px;
+        padding: 8px 16px;
+        transition: all 0.3s;
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .container {
+    max-width: 600px;
+    margin: auto;
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
 }
 
-.card-title {
-    font-weight: bold;
-    font-size: 1.25rem;
+.form-label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
 }
 
-.card-text {
-    color: #6c757d;
+.form-control,
+.form-select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    font-size: 16px;
 }
 
-.card .btn {
-    border-radius: 50px;
-    padding: 10px 25px;
-    font-weight: 500;
+.form-control:focus,
+.form-select:focus {
+    border-color: #28a745;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
 }
 
-.card-body i {
-    transition: transform 0.3s ease;
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
 
-.card:hover i {
-    transform: scale(1.2);
+.btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
 
 </style>
      
@@ -61,35 +122,46 @@
 <div class="content" id="content">
     <!-- Top Bar -->
     @include('topbar')
+
+    <a href="{{ route('admin.leave_types') }}" class="btn btn-success">
+    <i class="fas fa-arrow-left"></i> Go Back
+</a>
     
-    <div class="container mt-4">
-    <div class="row g-4">
-        <!-- Add Employee Card -->
-        <div class="col-md-6">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body text-center">
-                    <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
-                    <h5 class="card-title">Add Employee</h5>
-                    <p class="card-text">Register a new employee into the system.</p>
-                    <a href="{{ route('admin.add_employee') }}" class="btn btn-primary">Add Now</a>
-                   
-                </div>
-            </div>
+    <div class="container mt-5">
+    <h3 class="mb-4">Add New Leave</h3>
+    
+    <form action="#" method="POST">
+        <!-- Leave Name -->
+        <div class="mb-3">
+            <label for="leave_name" class="form-label">Leave Name</label>
+            <input type="text" class="form-control" id="leave_name" name="leave_name" placeholder="Enter leave name" required>
         </div>
 
-        <!-- Manage Employees Card -->
-        <div class="col-md-6">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body text-center">
-                    <i class="fas fa-users-cog fa-3x text-success mb-3"></i>
-                    <h5 class="card-title">Manage Employees</h5>
-                    <p class="card-text">Edit or view registered employees.</p>
-                    <!-- <a href="/admin/Manage_employee" class="btn btn-success">Manage</a> -->
-                    <a href="{{ route('admin.manageemployee') }}" class="btn btn-primary">Manage Now</a>
-                </div>
-            </div>
+        <!-- Number of Days -->
+        <div class="mb-3">
+            <label for="no_of_days" class="form-label">Number of Days</label>
+            <input type="number" class="form-control" id="no_of_days" name="no_of_days" placeholder="Enter number of days" min="1" required>
         </div>
-    </div>
+
+        <!-- Leave Status -->
+        <div class="mb-4">
+            <label for="status" class="form-label">Status</label>
+            <select class="form-select" id="status" name="status" required>
+                <option value="" selected disabled>Select status</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+                <option value="Pending">Pending</option>
+            </select>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success">Add Leave</button>
+            <a href="#" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
 </div>
 
    
