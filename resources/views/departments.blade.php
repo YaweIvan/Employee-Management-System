@@ -98,50 +98,7 @@
         </div>
     </div>
 
-    <div class="container mt-4">
-    <h3 class="mb-4"> Departments</h3>
-
-    <table class="table table-hover table-bordered">
-    <thead class="table-primary">
-        <tr>
-            <th>#</th>
-            <th>Department Name</th>
-            <th>Short Form</th>
-            <th>Code</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>Human Resources</td>
-            <td>HR</td>
-            <td>HR001</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Finance</td>
-            <td>FIN</td>
-            <td>FIN002</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>IT Support</td>
-            <td>IT</td>
-            <td>IT003</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Operations</td>
-            <td>OPS</td>
-            <td>OPS004</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Marketing</td>
-            <td>MKT</td>
-            <td>MKT005</td>
-        </tr>
-    </tbody>
+   
 </table>
 
 </div>

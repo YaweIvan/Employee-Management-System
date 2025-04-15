@@ -245,7 +245,7 @@ html[data-bs-theme='dark'] .btn-danger:hover {
                             </select>
                         </td>
                         <td>
-                            <button class="btn btn-warning">✏️ Edit</button>
+                        <a href="{{ route('admin.editleave') }}" class="btn btn-warning">✏️ Edit</a>
                         </td>
                     </tr>
                     <tr>
@@ -259,8 +259,10 @@ html[data-bs-theme='dark'] .btn-danger:hover {
                                 <option>Pending</option>
                             </select>
                         </td>
+                        
                         <td>
-                            <button class="btn btn-warning">✏️ Edit</button>
+                        <a href="{{ route('admin.editleave') }}" class="btn btn-warning">✏️ Edit</a>
+
                         </td>
                     </tr>
                     <!-- Add more rows as needed -->

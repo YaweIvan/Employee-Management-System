@@ -1,6 +1,9 @@
 <?php
+use App\Http\Controllers\EmployeeController;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DepartmentController;
+
 
 
 Route::get('/', function () {
@@ -31,15 +34,25 @@ Route::get('/admin/departments', function () {
     return view('departments');
 })->name('admin.departments');
 
-Route::get('/admin/create-department', function () {
-    return view('createdepartment');
-})->name('admin.create_department');
-
-Route::get('/admin/manage-department', function () {
-    return view('managedepartment');
-})->name('admin.manage_department');
 
 
+// Route::get('/admin/create-department', function () {
+//     return view('createdepartment');
+// })->name('admin.create_department');
+Route::get('/admin/create-department', [DepartmentController::class, 'create'])->name('admin.create_department');
+Route::post('/admin/create-department', [DepartmentController::class, 'store'])->name('admin.store_department');
+
+
+
+// Route::get('/admin/manage-department', function () {
+//     return view('managedepartment');
+// })->name('admin.manage_department');
+Route::get('/admin/manage-department', [DepartmentController::class, 'index'])->name('admin.manage_department');
+
+//edit and delete
+Route::get('/admin/edit-department/{id}', [DepartmentController::class, 'edit'])->name('admin.edit_department');
+Route::post('/admin/update-department/{id}', [DepartmentController::class, 'update'])->name('admin.update_department');
+Route::delete('/admin/delete-department/{id}', [DepartmentController::class, 'destroy'])->name('admin.delete_department');
 
 
 
@@ -72,10 +85,14 @@ Route::get('/admin/leave-types', function () {
 Route::get('/admin/leave-requests', function () {
     return view('leave_requests');
 })->name('admin.leave_requests');
-
+//addleave
 Route::get('/admin/add-leave', function () {
     return view('addleave');
 })->name('admin.addleave');
+//editleave
+Route::get('/admin/edit-leave', function () {
+    return view('editleave');
+})->name('admin.editleave');
 
 
 // Reports
@@ -94,3 +111,48 @@ Route::get('/admin/settings', function () {
 })->name('admin.settings');
 
 
+
+
+//hillarries
+
+
+
+
+// // Employee Dashboard Routes
+// Route::middleware('auth')->group(function () {
+//     // Dashboard Section
+//     Route::get('/dashboard', [EmployeeController::class, 'dashboard'])->name('employee.dashboard');
+
+//     // Profile Section
+//     Route::get('/profile', [EmployeeController::class, 'profile'])->name('employee.profile');
+//     Route::post('/profile/update', [EmployeeController::class, 'updateProfile'])->name('employee.profile.update');
+
+//     // Leave Section
+//     Route::get('/leave', [EmployeeController::class, 'leave'])->name('employee.leave');
+//     Route::post('/leave/apply', [EmployeeController::class, 'applyLeave'])->name('employee.leave.apply');
+//     Route::get('/leave/details', [EmployeeController::class, 'leaveDetails'])->name('employee.leave.details');
+
+//     // Attendance Section
+//     Route::get('/attendance', [EmployeeController::class, 'attendance'])->name('employee.attendance');
+
+//     // Logout Route
+//     Route::post('/logout', [EmployeeController::class, 'logout'])->name('logout');
+// });
+
+
+Route::get('/dashboard', [EmployeeController::class, 'dashboard'])->name('employee.dashboard');
+
+    // Profile Section
+    Route::get('/profile', [EmployeeController::class, 'profile'])->name('employee.profile');
+    Route::post('/profile/update', [EmployeeController::class, 'updateProfile'])->name('employee.profile.update');
+
+    // Leave Section
+    Route::get('/leave', [EmployeeController::class, 'leave'])->name('employee.leave');
+    Route::post('/leave/apply', [EmployeeController::class, 'applyLeave'])->name('employee.leave.apply');
+    Route::get('/leave/details', [EmployeeController::class, 'leaveDetails'])->name('employee.leave.details');
+
+    // Attendance Section
+    Route::get('/attendance', [EmployeeController::class, 'attendance'])->name('employee.attendance');
+
+    // Logout Route
+    Route::post('/logout', [EmployeeController::class, 'logout'])->name('logout');

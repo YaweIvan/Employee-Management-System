@@ -49,17 +49,167 @@
 <div class="content" id="content">
     <!-- Top Bar -->
     @include('topbar')
-    
-    
-   
-    
+
+    <div class="container py-4">
+        <h2 class="mb-4 text-center text-primary">Employee Reports</h2>
+
+        <!-- Summary Cards -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Employees</h5>
+                        <p class="display-6 text-success">150</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Attendance Issues</h5>
+                        <p class="display-6 text-danger">8</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Pending Leave Requests</h5>
+                        <p class="display-6 text-warning">3</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3 text-center">Employees by Department</h5>
+                        <canvas id="barChart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3 text-center">Attendance Status</h5>
+                        <canvas id="pieChart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report Table -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Employee Attendance Report</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Employee Name</th>
+                                <th>Department</th>
+                                <th>Present Days</th>
+                                <th>Absent Days</th>
+                                <th>Performance Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Alice Johnson</td>
+                                <td>HR</td>
+                                <td>22</td>
+                                <td>2</td>
+                                <td><span class="badge bg-success">Excellent</span></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Michael Smith</td>
+                                <td>IT</td>
+                                <td>20</td>
+                                <td>4</td>
+                                <td><span class="badge bg-warning text-dark">Average</span></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Sophia Lee</td>
+                                <td>Finance</td>
+                                <td>18</td>
+                                <td>6</td>
+                                <td><span class="badge bg-danger">Needs Improvement</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="mt-4 text-center">
         <p>© 2025 Employee Management System. All rights reserved.</p>
     </footer>
 </div>
 
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<!-- Chart Initialization -->
+<script>
+    // Bar Chart: Employees by Department
+    const barCtx = document.getElementById('barChart').getContext('2d');
+    new Chart(barCtx, {
+        type: 'bar',
+        data: {
+            labels: ['HR', 'IT', 'Finance', 'Marketing', 'Admin'],
+            datasets: [{
+                label: 'No. of Employees',
+                data: [30, 45, 25, 20, 30],
+                backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                borderRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+
+    // Pie Chart: Attendance Status
+    const pieCtx = document.getElementById('pieChart').getContext('2d');
+    new Chart(pieCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Present', 'Absent', 'On Leave'],
+            datasets: [{
+                data: [120, 20, 10],
+                backgroundColor: [
+                    'rgba(40, 167, 69, 0.7)', // green
+                    'rgba(220, 53, 69, 0.7)', // red
+                    'rgba(255, 193, 7, 0.7)'  // yellow
+                ],
+                borderColor: [
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(220, 53, 69, 1)',
+                    'rgba(255, 193, 7, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+        }
+    });
+</script>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

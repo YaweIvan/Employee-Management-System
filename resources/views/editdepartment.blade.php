@@ -193,79 +193,49 @@
 
     <!-- Main Content -->
     <div class="container py-5">
-        <!-- Page Title -->
-        <h1 class="text-center mb-4 text-primary">Notifications - WorkforceWave Management System</h1>
+    <!-- Page Title -->
+    <h2 class="mb-4 text-center text-primary">Edit Department</h2>
 
-        <!-- Notification Section -->
-        <div class="notification-section">
+    @if(session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success') }}
+        </div>
+    @endif
 
-            <!-- Leave Requests Card -->
-            <div class="card notification-card shadow-lg">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-0">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Leave Requests</h5>
-                    <div class="notification-item">
-                        <span class="fw-bold">Approved Leave Requests</span>
-                        <span class="badge bg-success badge-custom">5</span>
-                    </div>
-                    <div class="notification-item">
-                        <span class="fw-bold">Pending Leave Requests</span>
-                        <span class="badge bg-warning badge-custom">3</span>
-                    </div>
+                    <form action="{{ route('admin.update_department', $department->id) }}" method="POST">
+                        @csrf
+                        @method('POST') {{-- If you later use PUT, change this to @method('PUT') --}}
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Department Name</label>
+                            <input type="text" name="department_name" class="form-control" value="{{ $department->department_name }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Shortform</label>
+                            <input type="text" name="shortform" class="form-control" value="{{ $department->shortform }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Department Code</label>
+                            <input type="text" name="department_code" class="form-control" value="{{ $department->department_code }}" required>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="fas fa-save me-2"></i>Update Department
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-
-            <!-- Employee Status Card -->
-            <div class="card notification-card shadow-lg">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Employee Status</h5>
-                    <div class="notification-item">
-                        <span class="fw-bold">Recently Added Employees</span>
-                        <span class="badge bg-info badge-custom">2</span>
-                    </div>
-                    <div class="notification-item">
-                        <span class="fw-bold">Recently Removed Employees</span>
-                        <span class="badge bg-danger badge-custom">1</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- System Updates Card -->
-            <div class="card notification-card shadow-lg">
-                <div class="card-body">
-                    <h5 class="card-title text-center">System Updates</h5>
-                    <div class="notification-item">
-                        <span class="fw-bold">Recently Updated Policies</span>
-                        <span class="badge bg-primary badge-custom">3</span>
-                    </div>
-                    <div class="notification-item">
-                        <span class="fw-bold">New System Features</span>
-                        <span class="badge bg-success badge-custom">1</span>
-                    </div>
-                    <div class="notification-item">
-                        <span class="fw-bold">Recent Maintenance Updates</span>
-                        <span class="badge bg-secondary badge-custom">2</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Other Notifications Card -->
-            <div class="card notification-card shadow-lg">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Other Notifications</h5>
-                    <div class="notification-item">
-                        <span class="fw-bold">Upcoming Meetings</span>
-                        <span class="badge bg-info badge-custom">4</span>
-                    </div>
-                    <div class="notification-item">
-                        <span class="fw-bold">Pending Task Updates</span>
-                        <span class="badge bg-warning badge-custom">6</span>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
-
+</div>
     <!-- Footer -->
     <footer class="mt-4 text-center">
         <p>© 2025 Employee Management System. All rights reserved.</p>

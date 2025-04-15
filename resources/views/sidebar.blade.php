@@ -3,7 +3,8 @@
         <h4 class="text-center mb-0">Employee MS</h4>
     </div>
     <div class="px-3 mb-4 text-center">
-        <img src="/api/placeholder/120/120" alt="Admin" class="rounded-circle mb-2" style="width: 100px; height: 100px; object-fit: cover;">
+    
+        <img src="{{ asset('images/bossminions.png') }}" alt="Admin" class="rounded-circle mb-2" style="width: 30px; height: 30px; object-fit: cover;">
         <h6 class="mb-0">Admin User</h6>
         <small>System Administrator</small>
     </div>

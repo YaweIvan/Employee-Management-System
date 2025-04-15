@@ -89,10 +89,18 @@ footer {
 <div class="container mt-4">
     <h2 class="mb-4 text-center">Add Department</h2>
 
+    {{-- Success Flash Message --}}
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="card shadow-sm">
         <div class="card-body">
-            <form action="#" method="POST">
+            <form action="{{ route('admin.store_department') }}" method="POST">
                 @csrf {{-- For Laravel --}}
+                
                 <div class="mb-3">
                     <label for="deptName" class="form-label">Department Name</label>
                     <input type="text" class="form-control" id="deptName" name="department_name" placeholder="e.g. Human Resource">
@@ -108,11 +116,14 @@ footer {
                     <input type="text" class="form-control" id="deptCode" name="department_code" placeholder="e.g. HR001">
                 </div>
 
-                <button type="submit" class="btn btn-primary"><i class="fas fa-plus me-2"></i>Add Department</button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i>Add Department
+                </button>
             </form>
         </div>
     </div>
 </div>
+
 
 <!-- Footer -->
 <footer class="mt-4 text-center">

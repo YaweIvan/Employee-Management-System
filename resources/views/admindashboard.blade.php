@@ -127,153 +127,74 @@
         </div>
     </div>
 
-    <!-- Recent Activity & Charts Section -->
-    <div class="row mt-4">
-        <div class="col-lg-8">
-            <div class="card h-100">
-                <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Leave Requests Overview</h5>
-                    <button class="btn btn-sm btn-outline-primary">View All</button>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Employee</th>
-                                    <th>Department</th>
-                                    <th>Leave Type</th>
-                                    <th>From</th>
-                                    <th>To</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Jane Doe</td>
-                                    <td>HR</td>
-                                    <td>Sick Leave</td>
-                                    <td>10/04/2025</td>
-                                    <td>12/04/2025</td>
-                                    <td><span class="badge bg-success status-badge">Approved</span></td>
-                                </tr>
-                                <tr>
-                                    <td>John Smith</td>
-                                    <td>IT</td>
-                                    <td>Vacation</td>
-                                    <td>15/04/2025</td>
-                                    <td>25/04/2025</td>
-                                    <td><span class="badge bg-warning status-badge">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Robert Brown</td>
-                                    <td>Finance</td>
-                                    <td>Sick Leave</td>
-                                    <td>05/04/2025</td>
-                                    <td>07/04/2025</td>
-                                    <td><span class="badge bg-danger status-badge">Rejected</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card h-100">
-                <div class="card-header bg-transparent">
-                    <h5 class="mb-0">Department Distribution</h5>
-                </div>
-                <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                    <!-- Placeholder for chart -->
-                    <div style="width:100%; max-width:300px;">
-                        <img src="/api/placeholder/300/200" alt="Department Chart" class="img-fluid">
-                    </div>
-                    <div class="mt-3 w-100">
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>IT Department</span>
-                            <span>40%</span>
-                        </div>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>HR Department</span>
-                            <span>25%</span>
-                        </div>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Finance Department</span>
-                            <span>20%</span>
-                        </div>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Marketing Department</span>
-                            <span>15%</span>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Quick Access Section -->
     <div class="card mt-4">
-        <div class="card-header bg-transparent">
-            <h5 class="mb-0">Quick Actions</h5>
-        </div>
-        <div class="card-body">
-            <div class="row g-3">
-                <div class="col-md-3 col-sm-6">
-                    <div class="card h-100 text-center">
+    <div class="card-header bg-transparent">
+        <h5 class="mb-0">Quick Actions</h5>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            <!-- Add New Employee -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card h-100 text-center">
+                    <a href="{{ route('admin.add_employee') }}" class="text-decoration-none">
                         <div class="card-body">
                             <div class="rounded-circle bg-primary bg-opacity-10 p-3 mx-auto mb-3" style="width: fit-content;">
                                 <i class="fas fa-user-plus text-primary" style="font-size: 1.5rem;"></i>
                             </div>
                             <h6>Add New Employee</h6>
                         </div>
-                    </div>
+                    </a>
                 </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card h-100 text-center">
+            </div>
+
+            <!-- Generate Payslips (you can link it to your salary management or similar) -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card h-100 text-center">
+                    <a href="{{ route('admin.salary') }}" class="text-decoration-none">
                         <div class="card-body">
                             <div class="rounded-circle bg-success bg-opacity-10 p-3 mx-auto mb-3" style="width: fit-content;">
                                 <i class="fas fa-file-invoice text-success" style="font-size: 1.5rem;"></i>
                             </div>
                             <h6>Generate Payslips</h6>
                         </div>
-                    </div>
+                    </a>
                 </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card h-100 text-center">
+            </div>
+
+            <!-- Approve Leaves -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card h-100 text-center">
+                    <a href="{{ route('admin.leave_requests') }}" class="text-decoration-none">
                         <div class="card-body">
                             <div class="rounded-circle bg-warning bg-opacity-10 p-3 mx-auto mb-3" style="width: fit-content;">
                                 <i class="fas fa-calendar-check text-warning" style="font-size: 1.5rem;"></i>
                             </div>
                             <h6>Approve Leaves</h6>
                         </div>
-                    </div>
+                    </a>
                 </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card h-100 text-center">
+            </div>
+
+            <!-- View Reports -->
+            <div class="col-md-3 col-sm-6">
+                <div class="card h-100 text-center">
+                    <a href="{{ route('admin.reports') }}" class="text-decoration-none">
                         <div class="card-body">
                             <div class="rounded-circle bg-info bg-opacity-10 p-3 mx-auto mb-3" style="width: fit-content;">
                                 <i class="fas fa-chart-pie text-info" style="font-size: 1.5rem;"></i>
                             </div>
                             <h6>View Reports</h6>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 
     <!-- Footer -->
     <footer class="mt-4 text-center">

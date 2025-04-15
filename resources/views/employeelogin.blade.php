@@ -58,10 +58,10 @@
             </div>
 
             <div class="d-grid">
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-box-arrow-in-right me-1"></i> Login
-                </button>
-            </div>
+    <a href="{{ route('employee.dashboard') }}" class="btn btn-primary">
+        <i class="bi bi-box-arrow-in-right me-1"></i> Login
+    </a>
+</div>
         </form>
     </div>
 </div>

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee MS Dashboard</title>
@@ -17,16 +14,50 @@
      <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     
      <style>
-    .table thead th {
-        background-color: #007bff;
-        color: white;
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+    }
+    
+    .btn {
+        border-radius: 5px;
+        padding: 8px 16px;
+        transition: all 0.3s;
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
-    .btn-sm i {
-        margin-right: 5px;
-    }
-      </style>
+    .custom-edit-form {
+    max-width: 650px;
+    margin: 0 auto;
+    border-radius: 15px;
+}
 
+.custom-edit-form .card-header {
+    font-size: 1.25rem;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.custom-edit-form .form-control,
+.custom-edit-form .form-select {
+    border-radius: 10px;
+}
+
+.custom-edit-form .btn {
+    border-radius: 10px;
+}
+
+</style>
      
 </head>
 <body>
@@ -35,58 +66,63 @@
 @include('sidebar')
     <a href="#" data-bs-toggle="modal" data-bs-target="#settingsModal"><i class="fas fa-cog me-2"></i> Settings</a>
 </div>
-
+  
 <!-- Main Content -->
 <div class="content" id="content">
     <!-- Top Bar -->
     @include('topbar')
-
-    <!-- Go Back Button -->
-<a href="{{ route('admin.departments') }}" class="btn btn-success">
+    <!-- go back button -->
+    <a href="{{ route('admin.leave_types') }}" class="btn btn-success">
     <i class="fas fa-arrow-left"></i> Go Back
 </a>
+    <!-- Edit Leave Form -->
+    <div class="container mt-5">
+    <div class="card shadow custom-edit-form">
+        <div class="card-header bg-primary text-white fw-bold">
+            ✏️ Edit Leave
+        </div>
+        <div class="card-body">
+            <form action="#" method="POST">
+                <!-- Leave Name -->
+                <div class="mb-3">
+                    <label for="leave_name" class="form-label">Leave Name</label>
+                    <input type="text" class="form-control" id="leave_name" name="leave_name"
+                        value="Marriage Leave" required>
+                </div>
 
-    <div class="container mt-4">
-    <h3 class="mb-4">Manage Departments</h3>
+                <!-- Number of Days -->
+                <div class="mb-3">
+                    <label for="no_of_days" class="form-label">Number of Days</label>
+                    <input type="number" class="form-control" id="no_of_days" name="no_of_days"
+                        value="10" required>
+                </div>
 
-    
-    <table class="table table-hover table-bordered">
-    <thead class="table-primary">
-        <tr>
-            <th>#</th>
-            <th>Department Name</th>
-            <th>Short Form</th>
-            <th>Code</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($departments as $department)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $department->department_name }}</td>
-                <td>{{ $department->shortform }}</td>
-                <td>{{ $department->department_code }}</td>
-                <td>
-    <!-- Edit Button -->
-    <a href="{{ route('admin.edit_department', $department->id) }}" class="btn btn-sm btn-warning">
-        <i class="fas fa-edit"></i> Edit
-    </a>
+                <!-- Status -->
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <select class="form-select" id="status" name="status" required>
+                        <option value="Active">Active</option>
+                        <option value="Inactive" selected>Inactive</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                </div>
 
-    <!-- Delete Button -->
-    <form action="{{ route('admin.delete_department', $department->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this department?');">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-sm btn-danger">
-            <i class="fas fa-trash"></i> Delete
-        </button>
-    </form>
-</td>
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-4">💾 Update</button>
+                    <a href="#" class="btn btn-secondary px-4">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-            </tr>
-        @endforeach
-    </tbody>
-</table>
+
+    <!-- Footer -->
+    <footer class="mt-5 text-center">
+        <p>© 2025 Employee Management System. All rights reserved.</p>
+    </footer>
+</div>
 
 
 
