@@ -2,6 +2,7 @@
 use App\Http\Controllers\EmployeeController;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DepartmentController;
 
 
@@ -118,41 +119,23 @@ Route::get('/admin/settings', function () {
 
 
 
-// // Employee Dashboard Routes
-// Route::middleware('auth')->group(function () {
-//     // Dashboard Section
-//     Route::get('/dashboard', [EmployeeController::class, 'dashboard'])->name('employee.dashboard');
+Route::get('/employee/dashboard', function(){
+    return view('partials.dashboard');
+})->name('employee.dashboard');
 
-//     // Profile Section
-//     Route::get('/profile', [EmployeeController::class, 'profile'])->name('employee.profile');
-//     Route::post('/profile/update', [EmployeeController::class, 'updateProfile'])->name('employee.profile.update');
+Route::get('/employee/profile', function(){
+    return view('partials.profile');
+})->name('employee.profile');
 
-//     // Leave Section
-//     Route::get('/leave', [EmployeeController::class, 'leave'])->name('employee.leave');
-//     Route::post('/leave/apply', [EmployeeController::class, 'applyLeave'])->name('employee.leave.apply');
-//     Route::get('/leave/details', [EmployeeController::class, 'leaveDetails'])->name('employee.leave.details');
+Route::get('/employee/leave', function (){
+    return view('partials.leave');
+})->name('employee.leave');
 
-//     // Attendance Section
-//     Route::get('/attendance', [EmployeeController::class, 'attendance'])->name('employee.attendance');
+Route::get('/employee/attendance', function(){
+    return view('partials.attendance');
+})->name('employee.attendance');
 
-//     // Logout Route
-//     Route::post('/logout', [EmployeeController::class, 'logout'])->name('logout');
-// });
-
-
-Route::get('/dashboard', [EmployeeController::class, 'dashboard'])->name('employee.dashboard');
-
-    // Profile Section
-    Route::get('/profile', [EmployeeController::class, 'profile'])->name('employee.profile');
-    Route::post('/profile/update', [EmployeeController::class, 'updateProfile'])->name('employee.profile.update');
-
-    // Leave Section
-    Route::get('/leave', [EmployeeController::class, 'leave'])->name('employee.leave');
-    Route::post('/leave/apply', [EmployeeController::class, 'applyLeave'])->name('employee.leave.apply');
-    Route::get('/leave/details', [EmployeeController::class, 'leaveDetails'])->name('employee.leave.details');
-
-    // Attendance Section
-    Route::get('/attendance', [EmployeeController::class, 'attendance'])->name('employee.attendance');
-
-    // Logout Route
-    Route::post('/logout', [EmployeeController::class, 'logout'])->name('logout');
+Route::get('/employee/logout', function(){
+    Auth::logout();
+    return redirect('login');
+})->name('employee.logout');

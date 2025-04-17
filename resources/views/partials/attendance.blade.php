@@ -1,41 +1,66 @@
-<section class="attendence-section {{ $section === 'attendance' ? 'active' : '' }}">
+<!DOCTYPE html>
+<html lang="en">
 
-    <div class="attendence">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Attendance</title>
 
+    <link rel="stylesheet" href="{{ asset('CSS/Employee.css') }}">
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    @include('employee');
+
+    <div class="attendance">
         <div class="details">
-            <span class="back">
+            <a class="back" href="{{ route('employee.dashboard') }}">
                 <i class="bi bi-arrow-left"></i>
-            </span>
-            <p class="bold">Attendence Records</p>
+            </a>
+            <p class="bold">Attendance Records</p>
         </div>
 
-
-        <div class="overlay"></div>
-        <div class="attendence-details">
+        <div class="attendance-details">
             <div class="head">
                 <h3>My Attendance History</h3>
-                <span id="close"><i class="bi bi-x-square"></i></span>
             </div>
-            <form action="" class="form-wrap">
-                <div class="input">
-                    <label for="sn-A">SN</label>
-                    <input type="text" id="sn-A" name="sn">
-                </div>
-                <div class="input">
-                    <label for="punch-in">Punch-In</label>
-                    <input type="text" name="punchIn" id="punch-in">
-                </div>
-                <div class="input">
-                    <label for="punch-out">Punch-Out</label>
-                    <input type="text" name="punchOut" id="punch-out">
-                </div>
-                <div class="no-records">
-                    No Record found
-                </div>
-            </form>
-        </div>
 
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Arrival Time</th>
+                        <th>Departure Time</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2023-10-15</td>
+                        <td>08:45 AM</td>
+                        <td>05:15 PM</td>
+                        <td class="status-present"><span>Present</span></td>
+                    </tr>
+                    <tr>
+                        <td>2023-10-14</td>
+                        <td></td>
+                        <td></td>
+                        <td class="status-absent"><span>Absent</span></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
     </div>
 
+</body>
 
-</section>
+</html>

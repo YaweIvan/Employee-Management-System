@@ -1,19 +1,38 @@
-<section class="profile-section {{ $section === 'profile' ? 'active' : '' }}">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Profile</title>
+    
+    <link rel="stylesheet" href="{{ asset('CSS/Employee.css') }}">
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+</head>
+
+<body>
+
+    @include('employee');
 
     <div class="profile">
-        
+
         <div class="details">
-            <span class="back">
+            <a class="back" href="{{ route('employee.dashboard') }}">
                 <i class="bi bi-arrow-left"></i>
-            </span>
+            </a>
             <p class="bold">Attendence Records</p>
         </div>
 
-        <form action="{{ route('employee.profile.update') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('employee.profile') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-wrapper">
                 <h3>Update Your Details</h3>
-                <hr>
                 <div class="form-input">
                     <input type="file" id="imageInput" name="image" hidden>
                     <img src="{{$user->profile_image ?? asset('images/icons8-user-96-(3).png')}}" class="img icon" id="imagePreview" alt="">
@@ -37,4 +56,6 @@
         </form>
     </div>
 
-</section>
+</body>
+
+</html>

@@ -1,92 +1,84 @@
-<section class="leave-section {{ $section === 'leave' ? 'active' : '' }}">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Leave-Request</title>
+
+    <link rel="stylesheet" href="{{ asset('CSS/Employee.css') }}">
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script defer src="{{ asset('JS/employee.js') }}"></script>
+
+</head>
+
+<body>
+
+    @include('employee');
 
     <div class="leave">
 
         <div class="details">
-            <span class="back">
+            <a class="back" href="{{ route('employee.dashboard') }}">
                 <i class="bi bi-arrow-left"></i>
-            </span>
+            </a>
             <p class="bold">Leave Request</p>
         </div>
 
-        <button class="btn" id="open-popup">Apply for Leave</button>
-        <form action="" class="form-wrapper" id="leave-details-form">
+        <div class="leave-form">
 
-            <h3>Leave Details</h3>
-            
-            <div class="form-content">
-                <div class="input">
-                    <label for="sn">SN</label>
-                    <input id="sn" type="text" name="sn">
-                </div>
-
-                <div class="input">
-                    <label for="leave">Leave Type</label>
-                    <input id="leave" type="text" name="leave">
-                </div>
-                <div class="input">
-                    <label for="from">From</label>
-                    <input id="from" value="March 10, 2025" type="text" name="from">
-                </div>
-                <div class="input">
-                    <label for="to">To</label>
-                    <input id="to" value="March 30, 2025" type="text" name="to">
-                </div>
-                <div class="input">
-                    <label for="submitted">Submitted On</label>
-                    <input id="submitted" type="text" name="submitted">
-                </div>
-                <div class="input">
-                    <label for="status">Status</label>
-                    <input id="status" value="Approved" type="text" name="status">
-                </div>
-                <div class="input del">
-                    <label for="action">Action</label>
-                    <span class="delete"><i class="bi bi-trash3"></i></span>
-                </div>
-                <div class="no-records">
-                    No Record found
-                </div>
+            <div class="head">
+                <h3>Apply for leave</h3>
             </div>
 
-        </form>
-    </div>
-    <div class="overlay"></div>
-    <div class="popup">
-        <div class="head">
-            <h3>Apply for leave</h3>
-            <span id="close"><i class="bi bi-x-square"></i></span>
+            <form action="{{ route('employee.leave') }}" method="POST" class="pop-form"
+                id="leave-application-form">
+                @csrf
+                <div class="form-select">
+                    <div class="select">
+                        <label for="category">Leave type </label>
+                        <select id="category" name="category" required>
+                            <option value="" disabled selected>Choose Leave type</option>
+                            <option value="Sick Leave">Sick Leave</option>
+                            <option value="Vacation">Vacation</option>
+                            <option value="Personal Leave">Personal Leave</option>
+                            <option value="Maternity/Paternity">Maternity/Paternity</option>
+                        </select>
+                    </div>
+
+                    <div class="input">
+                        <label for="submitted">Submitted On</label>
+                        <span>{{ $date ?? now()->format('D, d M Y')}}</span>
+                    </div>
+                </div>
+                <div class="input-wrapper">
+                    <span>
+                        <div class="input">
+                            <label for="fromDate">From</label>
+                            <input type="date" name="fromDate" id="fromDate" required>
+                        </div>
+                        <div class="input">
+                            <label for="toDate">To</label>
+                            <input type="date" name="toDate" id="toDate" required>
+                        </div>
+                    </span>
+                    <textarea id="leaveDescription" name="leaveDescription" placeholder="Write your leave description here..."></textarea>
+                </div>
+
+                <button type="submit" class="btn">
+                    Apply
+                    <span class="spinner"></span>
+                </button>
+            </form>
         </div>
-        <form action="{{ route('employee.leave.apply') }}" method="POST" class="pop-form" id="leave-application-form">
-            @csrf
-            <div class="form-select">
-                <label for="category">Leave type </label>
-                <select id="category" name="category" required>
-                    <option value="" disabled selected>Choose Leave type</option>
-                    <option value="Sick Leave">Sick Leave</option>
-                    <option value="Vacation">Vacation</option>
-                    <option value="Personal Leave">Personal Leave</option>
-                    <option value="Maternity/Paternity">Maternity/Paternity</option>
-                </select>
-            </div>
-            <div class="input-wrapper">
-                <div class="input">
-                    <label for="fromDate">From</label>
-                    <input type="date" name="from" id="fromDate" required>
-                </div>
-                <div class="input">
-                    <label for="toDate">To</label>
-                    <input type="date" name="to" id="toDate" required>
-                </div>
-            </div>
-            <textarea id="leaveDescription" name="leaveDescription"
-                placeholder="Write your leave description here..."></textarea>
-            <button type="submit" class="btn">
-                Apply
-                <span class="spinner"></span>
-            </button>
-        </form>
     </div>
 
+</body>
 
-</section>
+</html>
