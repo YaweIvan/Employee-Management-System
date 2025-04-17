@@ -18,7 +18,7 @@
 
 <body>
 
-    @extends('employee');
+    @extends('employee')
 
     <div class="profile">
 
