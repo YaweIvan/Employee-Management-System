@@ -20,7 +20,7 @@
 
 <body>
 
-    @include('employee');
+@extends('employee');
 
     <div class="leave">
 
@@ -37,8 +37,7 @@
                 <h3>Apply for leave</h3>
             </div>
 
-            <form action="{{ route('employee.leave') }}" method="POST" class="pop-form"
-                id="leave-application-form">
+            <form action="{{ route('employee.leave') }}" method="POST" class="pop-form" id="leave-application-form">
                 @csrf
                 <div class="form-select">
                     <div class="select">

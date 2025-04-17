@@ -138,7 +138,13 @@ html[data-bs-theme='dark'] .btn-danger:hover {
     <div class="container mt-4">
     <h3 class="text-center mb-4">Add New Employee</h3>
 
-    <form method="POST" action="#">
+    <!-- Success Message -->
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    <!-- Employee Add Form -->
+    <form method="POST" action="{{ route('admin.store_employee') }}" enctype="multipart/form-data">
         @csrf
 
         <!-- === Bio Data === -->
@@ -147,20 +153,25 @@ html[data-bs-theme='dark'] .btn-danger:hover {
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Full Name</label>
-                    <input type="text" class="form-control" placeholder="Enter Full Name">
+                    <input type="text" name="name" class="form-control" placeholder="Enter Full Name" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control" placeholder="Enter Email">
+                    <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Phone Number</label>
-                    <input type="text" class="form-control" placeholder="Enter Phone Number">
+                    <input type="text" name="phone" class="form-control" placeholder="Enter Phone Number" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Employee ID</label>
-                    <input type="text" class="form-control" value="EMP1032" readonly>
+                    <input type="text" name="employee_id" class="form-control" value="EMP{{ rand(1000, 9999) }}" readonly>
                 </div>
+            </div>
+            <!-- Image Field -->
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Image</label>
+                <input type="file" name="image" class="form-control" accept="image/*">
             </div>
         </div>
 
@@ -170,15 +181,15 @@ html[data-bs-theme='dark'] .btn-danger:hover {
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">City</label>
-                    <input type="text" class="form-control" placeholder="Enter City">
+                    <input type="text" name="city" class="form-control" placeholder="Enter City" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">District</label>
-                    <input type="text" class="form-control" placeholder="Enter District">
+                    <input type="text" name="district" class="form-control" placeholder="Enter District" required>
                 </div>
                 <div class="col-12 mb-3">
                     <label class="form-label">Full Address</label>
-                    <textarea class="form-control" rows="3" placeholder="Enter Full Address"></textarea>
+                    <textarea name="address" class="form-control" rows="3" placeholder="Enter Full Address" required></textarea>
                 </div>
             </div>
         </div>
@@ -189,11 +200,11 @@ html[data-bs-theme='dark'] .btn-danger:hover {
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Department</label>
-                    <input type="text" class="form-control" placeholder="Enter Department">
+                    <input type="text" name="department" class="form-control" placeholder="Enter Department" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Role/Position</label>
-                    <input type="text" class="form-control" placeholder="Enter Role">
+                    <input type="text" name="role" class="form-control" placeholder="Enter Role" required>
                 </div>
             </div>
         </div>

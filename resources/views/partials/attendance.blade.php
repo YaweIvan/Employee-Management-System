@@ -18,7 +18,7 @@
 
 <body>
 
-    @include('employee');
+    @extends('employee');
 
     <div class="attendance">
         <div class="details">

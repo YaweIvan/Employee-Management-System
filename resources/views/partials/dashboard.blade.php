@@ -17,7 +17,7 @@
 
 <body>
 
-    @include('employee');
+    @extends('employee')
 
     <div class="dashboard-d">
 

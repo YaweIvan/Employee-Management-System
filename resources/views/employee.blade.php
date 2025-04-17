@@ -36,19 +36,19 @@
 
             <div class="dashboard-links">
 
-                <a href="{{ route('employee.dashboard') }}" class="{{ request()->routeIs('employee.dashboard' ? 'active' : '') }}">
+                <a href="{{ route('employee.dashboard') }}" class="{{ request()->routeIs('employee.dashboard')  ? 'active' : '' }}">
                     <span><i class="bi bi-speedometer2"></i></span> Dashboard
                 </a>
 
-                <a href="{{ route('employee.profile') }}" class="{{ request()->routeIs('employee.profile' ? 'active' : '') }}">
+                <a href="{{ route('employee.profile') }}" class="{{ request()->routeIs('employee.profile') ? 'active' : '' }}">
                     <span><i class="bi bi-person-lines-fill"></i></span> Profile Update
                 </a>
 
-                <a href="{{ route('employee.leave') }}" class="{{ request()->routeIs('employee.leave' ? 'active' : '') }}">
+                <a href="{{ route('employee.leave') }}" class="{{ request()->routeIs('employee.leave') ? 'active' : '' }}">
                     <span><i class="bi bi-pencil-square"></i></span> Leave Request
                 </a>
 
-                <a href="{{ route('employee.attendance') }}" class="{{ request()->routeIs('employee.attendaance' ? 'active' : '') }}">
+                <a href="{{ route('employee.attendance') }}" class="{{ request()->routeIs('employee.attendaance')  ? 'active' : ''}}">
                     <span><i class="bi bi-card-checklist"></i></span> Attendance
                 </a>
 
@@ -63,6 +63,9 @@
 
     </aside>
 
+    <main>
+        @yield('content')
+    </main>
 
     <footer>
         <p>@2025, Employee management System</p>

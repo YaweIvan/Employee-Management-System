@@ -18,7 +18,7 @@
 
 <body>
 
-    @include('employee');
+    @extends('employee');
 
     <div class="profile">
 
@@ -35,7 +35,8 @@
                 <h3>Update Your Details</h3>
                 <div class="form-input">
                     <input type="file" id="imageInput" name="image" hidden>
-                    <img src="{{$user->profile_image ?? asset('images/icons8-user-96-(3).png')}}" class="img icon" id="imagePreview" alt="">
+                    <img src="{{ $user->profile_image ?? asset('images/icons8-user-96-(3).png') }}" class="img icon" id="imagePreview" alt="Profile Image">
+                    
                     <div class="input-wrapper">
                         <div class="input">
                             <input type="password" name="current_password" placeholder="Current password" />

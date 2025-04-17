@@ -7,6 +7,7 @@ use App\Http\Controllers\DepartmentController;
 
 
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -62,14 +63,28 @@ Route::get('/admin/employees', function () {
     return view('employees');
 })->name('admin.employees');
 
-Route::get('/admin/add-employee', function () {
-    return view('addemployee');
-})->name('admin.add_employee');
+// Route::get('/admin/add-employee', function () {
+//     return view('addemployee');
+// })->name('admin.add_employee');
+Route::get('/admin/add-employee', [EmployeeController::class, 'create'])->name('admin.add_employee');
+Route::post('/admin/add-employee', [EmployeeController::class, 'store'])->name('admin.store_employee');
+
 
 //manageemployee
-Route::get('/admin/manage-employee', function () {
-    return view('manageemployee');
-})->name('admin.manageemployee');
+// Route::get('/admin/manage-employee', function () {
+//     return view('manageemployee');
+// })->name('admin.manageemployee');
+Route::get('/admin/manage-employee', [EmployeeController::class, 'index'])->name('admin.manageemployee');
+// Edit an employee
+Route::get('/admin/manage-employee/{id}/edit', [EmployeeController::class, 'edit'])->name('admin.employee.edit');
+
+// Update an employee after editing
+Route::put('/admin/manage-employee/{id}', [EmployeeController::class, 'update'])->name('admin.employee.update');
+
+// Delete an employee
+Route::delete('/admin/manage-employee/{id}', [EmployeeController::class, 'destroy'])->name('admin.employee.delete');
+
+
 
 
 // Salary Management
@@ -111,6 +126,9 @@ Route::get('/admin/settings', function () {
     return view('settings');
 })->name('admin.settings');
 
+
+//search employee
+Route::get('/admin/employees/search', [EmployeeController::class, 'search'])->name('admin.search_employee');
 
 
 

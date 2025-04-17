@@ -50,27 +50,6 @@ document.head.insertAdjacentHTML('beforeend', `
         return;
       }
     }
-    
-    // Back button functionality
-    const backButton = e.target.closest('.back');
-    if (backButton) {
-      // Hide all sections
-      document.querySelectorAll('section').forEach(section => {
-        section.classList.remove('active');
-      });
-      
-      // Show dashboard section
-      const dashboardSection = document.querySelector('.dashboard-section');
-      if (dashboardSection) {
-        dashboardSection.classList.add('active');
-      }
-      
-      // Update menu active state
-      document.querySelectorAll('.aside-menu').forEach(item => {
-        item.classList.toggle('active', item.getAttribute('data-section') === 'dashboard');
-      });
-      return;
-    }
   });
   
   // Image upload with lazy instantiation
