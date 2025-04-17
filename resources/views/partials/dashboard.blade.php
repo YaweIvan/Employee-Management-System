@@ -9,7 +9,7 @@
 
         <div class="content">
             <div class="card bg-yellow">
-                <a href="">
+                <a href="{{route()}}">
                     <span><i class="bi bi-speedometer2"></i></span>
                     <p>Dashboard</p>
                 </a>

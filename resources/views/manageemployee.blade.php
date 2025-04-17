@@ -69,6 +69,43 @@ h4 {
     overflow-x: auto;
 }
 
+/* Add this CSS to your stylesheet */
+input[type="text"] {
+    font-size: 0.875rem;  /* Smaller text size for a more compact look */
+    padding: 0.5rem 1rem;  /* Reduced padding for smaller input */
+    border-radius: 0.375rem;  /* Smaller rounded corners */
+    border: 1px solid #ccc;  /* Soft border color */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;  /* Smooth transition */
+}
+
+input[type="text"]:focus {
+    border-color: #007bff;  /* Focus border color */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);  /* Soft blue glow when focused */
+}
+
+button[type="submit"] {
+    font-size: 0.875rem;  /* Smaller font size */
+    padding: 0.5rem 1.25rem;  /* Reduced padding for smaller button */
+    border-radius: 0.375rem;  /* Rounded corners for the button */
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;  /* Smooth transition */
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;  /* Darker shade of blue for hover */
+    transform: scale(1.05);  /* Slight scale-up effect on hover */
+}
+
+.input-group {
+    display: flex;
+    gap: 5px;  /* Smaller gap between the input and button */
+}
+
+.row {
+    margin: 0;  /* Remove any extra margin */
+}
+
+
 </style>
      
 </head>
@@ -85,77 +122,86 @@ h4 {
     <a href="{{ route('admin.employees') }}" class="btn btn-success">
     <i class="fas fa-arrow-left"></i> Go Back
 </a>
+<!-- search for employee -->
+<form method="GET" action="{{ route('admin.search_employee') }}" class="mb-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control form-control-sm" placeholder="Search by Name or Employee ID" value="{{ request('search') }}">
+                <button type="submit" class="btn btn-primary btn-sm">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+
     
+
     <!-- Static Table of Employees -->
     <div class="container py-4">
         <h4 class="text-center mb-4">Employee Records</h4>
-
         <div class="table-responsive">
-            <table class="table table-bordered table-hover align-middle">
-                <thead class="text-center">
-                    <tr>
-                        <th>#</th>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Employee ID</th>
-                        <th>City</th>
-                        <th>District</th>
-                        <th>Address</th>
-                        <th>Department</th>
-                        <th>Role</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-center">1</td>
-                        <td>John Doe</td>
-                        <td>john.doe@example.com</td>
-                        <td>+1234567890</td>
-                        <td>EMP1032</td>
-                        <td>Kampala</td>
-                        <td>Central</td>
-                        <td>Plot 45, Main Street</td>
-                        <td>IT</td>
-                        <td>Software Developer</td>
+
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="text-center">
+            <tr>
+                <th>#</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Employee ID</th>
+                <th>City</th>
+                <th>District</th>
+                <th>Address</th>
+                <th>Department</th>
+                <th>Role</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($employees as $index => $employee)
+                <tr>
+                    <td class="text-center">{{ $index + 1 }}</td>
+                    <td>{{ $employee->name }}</td>
+                    <td>{{ $employee->email }}</td>
+                    <td>{{ $employee->phone }}</td>
+                    <td>{{ $employee->employee_id }}</td>
+                    <td>{{ $employee->city }}</td>
+                    <td>{{ $employee->district }}</td>
+                    <td>{{ $employee->address }}</td>
+                    <td>{{ $employee->department }}</td>
+                    <td>{{ $employee->role }}</td>
+                    <td class="text-center">
+                       @if ($employee->image)
+                            <img src="{{ asset('storage/' . $employee->image) }}" alt="Image" class="img-fluid rounded-circle" width="50">
+                        @else
+                            <span class="text-muted">No Image</span>
+                        @endif
+
                         <td class="text-center">
-                            <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">2</td>
-                        <td>Sarah Kintu</td>
-                        <td>sarah.kintu@example.com</td>
-                        <td>+256778900123</td>
-                        <td>EMP1045</td>
-                        <td>Jinja</td>
-                        <td>Eastern</td>
-                        <td>Plot 17, Nile Avenue</td>
-                        <td>HR</td>
-                        <td>HR Manager</td>
-                        <td class="text-center">
-                            <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">3</td>
-                        <td>Peter Okello</td>
-                        <td>peter.okello@example.com</td>
-                        <td>+256701234567</td>
-                        <td>EMP1090</td>
-                        <td>Gulu</td>
-                        <td>Northern</td>
-                        <td>Opp. Gulu Central Market</td>
-                        <td>Operations</td>
-                        <td>Field Supervisor</td>
-                        <td class="text-center">
-                            <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                    <!-- Edit Button -->
+                    <a href="{{ route('admin.employee.edit', $employee->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                </td>
+                <td class="text-center">
+                    <!-- Delete Button -->
+                    <form action="{{ route('admin.employee.delete', $employee->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="12" class="text-center text-muted">No employees found.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+
+
     </div>
 
     <!-- Footer -->
