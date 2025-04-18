@@ -11,31 +11,30 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     
-     <style>
-    .card-header {
-    font-weight: bold;
-    font-size: 1.1rem;
-}
+    <style>
+        .card-header {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
 
-.table th, .table td {
-    vertical-align: middle;
-}
+        .table th, .table td {
+            vertical-align: middle;
+        }
 
-h2 {
-    font-weight: 600;
-    color: #343a40;
-}
+        h2 {
+            font-weight: 600;
+            color: #343a40;
+        }
 
-</style>
-     
+    </style>
 </head>
 <body>
 
 <!-- Sidebar -->
 @include('sidebar')
-    <a href="#" data-bs-toggle="modal" data-bs-target="#settingsModal"><i class="fas fa-cog me-2"></i> Settings</a>
+<a href="#" data-bs-toggle="modal" data-bs-target="#settingsModal"><i class="fas fa-cog me-2"></i> Settings</a>
 </div>
 
 <!-- Main Content -->
@@ -46,39 +45,38 @@ h2 {
 <div class="container mt-4">
     <h2 class="mb-4 text-center">Salary Management</h2>
 
-    <!-- Generate Payroll Form -->
-    <div class="card shadow-sm mb-4">
+    <div class="card mb-4">
         <div class="card-header bg-primary text-white">
-            <i class="fas fa-calculator me-2"></i> Generate Payroll
+            <i class="fas fa-plus me-2"></i> Add Salary Record
         </div>
         <div class="card-body">
-            <form>
-                <div class="row g-3 align-items-end">
-                    <div class="col-md-4">
-                        <label for="employee" class="form-label">Select Employee</label>
-                        <select id="employee" class="form-select">
-                            <option selected disabled>Choose...</option>
-                            <option>John Doe</option>
-                            <option>Jane Smith</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-3">
-                        <label for="month" class="form-label">Pay Period</label>
-                        <input type="month" id="month" class="form-control">
-                    </div>
-
-                    <div class="col-md-3">
-                        <label for="allowances" class="form-label">Allowances</label>
-                        <input type="number" class="form-control" id="allowances" placeholder="e.g. 200.00">
-                    </div>
-
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-success w-100">
-                            <i class="fas fa-paper-plane me-1"></i> Generate
-                        </button>
-                    </div>
+            <form action="{{ route('salaries.store') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="employee_id">Employee</label>
+                    <select name="employee_id" id="employee_id" class="form-control" required>
+                        @foreach($employees as $employee)
+                            <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
+
+                <div class="form-group">
+                    <label for="pay_period">Pay Period</label>
+                    <input type="text" name="pay_period" id="pay_period" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="basic_salary">Basic Salary</label>
+                    <input type="number" name="basic_salary" id="basic_salary" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="allowances">Allowances</label>
+                    <input type="number" name="allowances" id="allowances" class="form-control" value="0">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Salary</button>
             </form>
         </div>
     </div>
@@ -86,42 +84,37 @@ h2 {
     <!-- Payroll Records Table -->
     <div class="card shadow-sm">
         <div class="card-header bg-secondary text-white">
-            <i class="fas fa-list me-2"></i> Payroll History
+            <i class="fas fa-list me-2"></i> Payroll Generation
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table mb-0">
                     <thead class="table-light">
                         <tr>
-                            <th>#</th>
+                            <th>No.</th>
                             <th>Employee</th>
                             <th>Pay Period</th>
                             <th>Basic Salary</th>
-                            <th>Allowances</th>
-                            <th>Deductions</th>
-                            <th>Net Salary</th>
+                            <th>Allowances (if any)</th>
+                            <th>Net Pay</th>
                         </tr>
                     </thead>
+
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>March 2025</td>
-                            <td>$1000</td>
-                            <td>$100</td>
-                            <td>$50</td>
-                            <td>$1050</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jane Smith</td>
-                            <td>March 2025</td>
-                            <td>$900</td>
-                            <td>$150</td>
-                            <td>$20</td>
-                            <td>$1030</td>
-                        </tr>
+                        @foreach($salaries as $salary)
+                            <tr>
+                                <td>{{ $salary->No }}</td>
+                                <td>{{ $salary->employee->name }}</td> <!-- Changed to employee relationship -->
+                                <td>{{ $salary->pay_period }}</td>
+                                <td>${{ number_format($salary->basic_salary, 2) }}</td>
+                                <td>${{ number_format($salary->allowances, 2) }}</td>
+                                <td>
+                                    ${{ number_format($salary->basic_salary + $salary->allowances, 2) }}
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
+
                 </table>
             </div>
         </div>
@@ -132,17 +125,13 @@ h2 {
 <footer class="mt-4 text-center">
     <p>© 2025 Employee Management System. All rights reserved.</p>
 </footer>
-
-    
-   
-    
-    <!-- Footer -->
-    <footer class="mt-4 text-center">
-        <p>© 2025 Employee Management System. All rights reserved.</p>
-    </footer>
 </div>
 
-
+@if(session('success'))
+    <div class="alert alert-success mt-2">
+        {{ session('success') }}
+    </div>
+@endif
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

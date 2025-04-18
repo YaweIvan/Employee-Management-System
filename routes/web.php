@@ -7,6 +7,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\Auth\EmployeeAuthController;
+use App\Http\Controllers\SalaryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -86,9 +87,15 @@ Route::delete('/admin/manage-employee/{id}', [EmployeeController::class, 'destro
 
 
 // Salary Management
-Route::get('/admin/salary-management', function () {
-    return view('salary_management');
-})->name('admin.salary');
+//Route::get('/admin/salary-management', function () {
+   // return view('salary_management');
+//})->name('admin.salary');
+
+
+Route::get('/admin/salary-management', [SalaryController::class, 'index'])->name('admin.salary');
+
+
+
 
 
 // Leave Types
@@ -181,3 +188,5 @@ Route::post('/employee/leave', [LeaveRequestController::class, 'store'])->name('
 
 Route::get('/admin/leave-requests', [LeaveRequestController::class, 'index'])->name('admin.leave_requests');
 
+Route::get('/salaries', [SalaryController::class, 'index'])->name('salaries.index');
+Route::post('/salaries', [SalaryController::class, 'store'])->name('salaries.store');
