@@ -8,6 +8,7 @@ use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\Auth\EmployeeAuthController;
 use App\Http\Controllers\SalaryController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,16 +20,16 @@ Route::post('/employee/login', [EmployeeAuthController::class, 'login'])->name('
 Route::get('/employee/dashboard', [EmployeeAuthController::class, 'dashboard'])->name('employee.dashboard');
 
 
-Route::get('/admin/admindashboard', function () {
-    return view('admindashboard');
-})->name('admindashboard');
+//Route::get('/admin/admindashboard', function () {
+    //return view('admindashboard');
+//})->name('admindashboard');
 
-
+// In web.php (routes/web.php)
+//Route::get('/admin/admindashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/admindashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 // Admin Dashboard
-Route::get('/admin/dashboard', function () {
-    return view('admindashboard');
-})->name('admin.dashboard');
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 // Departments
 Route::get('/admin/departments', function () {

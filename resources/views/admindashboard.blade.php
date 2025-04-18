@@ -31,10 +31,10 @@
         <div class="col-md-4 col-sm-6">
             <div class="card text-white bg-success h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
-                    <div>
-                        <h6 class="card-title">REGISTERED EMPLOYEES</h6>
-                        <h4>3</h4>
-                    </div>
+                <div>
+                    <h6 class="card-title">REGISTERED EMPLOYEES</h6>
+                    <h4>{{ $employeeCount }}</h4> <!-- Dynamically display the employee count -->
+                </div>
                     <i class="fas fa-users card-icon"></i>
                 </div>
                 <div class="card-footer bg-transparent border-0">
@@ -46,8 +46,8 @@
             <div class="card text-white bg-warning h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
-                        <h6 class="card-title">LISTED DEPARTMENTS</h6>
-                        <h4>4</h4>
+                    <h6 class="card-title">LISTED DEPARTMENTS</h6>
+                    <h4>{{ $departmentCount }}</h4>
                     </div>
                     <i class="fas fa-building card-icon"></i>
                 </div>
@@ -60,68 +60,13 @@
             <div class="card text-white bg-danger h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
-                        <h6 class="card-title">LISTED LEAVE TYPES</h6>
-                        <h4>2</h4>
+                    <h6 class="card-title">LISTED LEAVE TYPES</h6>
+                    <h4>{{ $leaveCount }}</h4>
                     </div>
                     <i class="fas fa-star card-icon"></i>
                 </div>
                 <div class="card-footer bg-transparent border-0">
                     <small>Sick Leave, Vacation</small>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Leave Stats Section -->
-    <div class="card mt-4">
-        <div class="card-header bg-transparent">
-            <h5 class="mb-0">Leaves Details</h5>
-        </div>
-        <div class="card-body">
-            <div class="row g-3">
-                <div class="col-md-3 col-sm-6">
-                    <div class="card bg-info text-white h-100">
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="card-title">LEAVES APPLIED</h6>
-                                <h4>4</h4>
-                            </div>
-                            <i class="fas fa-file-alt card-icon"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card bg-warning text-dark h-100">
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="card-title">NEW REQUESTS</h6>
-                                <h4>1</h4>
-                            </div>
-                            <i class="fas fa-file card-icon"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card bg-danger text-white h-100">
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="card-title">REJECTED</h6>
-                                <h4>1</h4>
-                            </div>
-                            <i class="fas fa-times-circle card-icon"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card bg-success text-white h-100">
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="card-title">APPROVED</h6>
-                                <h4>2</h4>
-                            </div>
-                            <i class="fas fa-check-circle card-icon"></i>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

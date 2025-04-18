@@ -44,16 +44,16 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>2023-10-15</td>
-                        <td>08:45 AM</td>
-                        <td>05:15 PM</td>
-                        <td class="status-present"><span>Present</span></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="status-present"><span></span></td>
                     </tr>
                     <tr>
-                        <td>2023-10-14</td>
                         <td></td>
                         <td></td>
-                        <td class="status-absent"><span>Absent</span></td>
+                        <td></td>
+                        <td class="status-absent"><span></span></td>
                     </tr>
 
                 </tbody>

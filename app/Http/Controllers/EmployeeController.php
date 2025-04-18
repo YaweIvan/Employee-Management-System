@@ -182,4 +182,7 @@ public function destroy($id)
     return redirect()->route('admin.manageemployee')->with('success', 'Employee deleted successfully!');
 }
 
+
+
+
 }
