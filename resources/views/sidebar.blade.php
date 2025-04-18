@@ -53,9 +53,4 @@
     <a href="{{ route('admin.reports') }}" class="{{ request()->routeIs('admin.reports') ? 'active' : '' }}">
         <i class="fas fa-chart-line me-2"></i> Reports
     </a>
-
-    <a href="{{ route('admin.notifications') }}" class="{{ request()->routeIs('admin.notifications') ? 'active' : '' }}">
-        <i class="fas fa-bell me-2"></i> Notifications
-        <span class="badge bg-danger float-end">3</span>
-    </a>
 </div>

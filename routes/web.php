@@ -108,7 +108,8 @@ Route::get('/admin/leave-types', [LeaveController::class, 'index'])->name('admin
 Route::get('/admin/add-leave', function () {
     return view('addleave');
 })->name('admin.addleave');
-Route::post('/admin/store-leave', [LeaveController::class, 'store'])->name('admin.storeleave');
+Route::post('/admin/store-leave', [LeaveController::class, 'storeLeaveType'])->name('admin.storeleave');
+
 
 
 //editleave
