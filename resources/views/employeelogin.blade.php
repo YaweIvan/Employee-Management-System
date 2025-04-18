@@ -49,7 +49,7 @@
 
             <div class="mb-3 position-relative">
                 <i class="bi bi-person-fill form-icon"></i>
-                <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+                <input type="email" name="username" class="form-control" placeholder="Username (Email)" required autofocus>
             </div>
 
             <div class="mb-3 position-relative">
@@ -58,10 +58,11 @@
             </div>
 
             <div class="d-grid">
-    <a href="{{ route('employee.dashboard') }}" class="btn btn-primary">
-        <i class="bi bi-box-arrow-in-right me-1"></i> Login
-    </a>
-</div>
+                <!-- Change this to a submit button -->
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Login
+                </button>
+            </div>
         </form>
     </div>
 </div>

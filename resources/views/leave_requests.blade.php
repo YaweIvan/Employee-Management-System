@@ -70,55 +70,42 @@
                     <tr>
                         <th>SN</th>
                         <th>EmpId</th>
+                        <th>Employee Name</th> <!-- Added Employee Name Column -->
                         <th>Leave Type</th>
                         <th>From</th>
                         <th>To</th>
                         <th>Submitted On</th>
                         <th>Status</th>
-                        <th>Action</th>
-                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>EMP001</td>
-                        <td>Annual Leave</td>
-                        <td>2025-04-15</td>
-                        <td>2025-04-20</td>
-                        <td>2025-04-10</td>
-                        <td>
-                            <span class="badge bg-warning text-dark">Pending</span>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-success">Approve</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>EMP002</td>
-                        <td>Sick Leave</td>
-                        <td>2025-04-12</td>
-                        <td>2025-04-14</td>
-                        <td>2025-04-11</td>
-                        <td>
-                            <span class="badge bg-success">Approved</span>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-secondary">View</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    <!-- Add more rows as needed -->
+                    @foreach($leaveRequests as $index => $request)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $request->employee->employee_id }}</td> <!-- Display employee_id -->
+                            <td>{{ $request->employee->name }}</td> <!-- Display employee name -->
+                            <td>{{ $request->leaveType->leave_name }}</td> <!-- Display leave type name -->
+                            <td>{{ $request->from_date }}</td> <!-- Display from date -->
+                            <td>{{ $request->to_date }}</td> <!-- Display to date -->
+                            <td>{{ $request->submitted_on }}</td> <!-- Display submitted on date -->
+                            <td>
+                                <span class="badge 
+                                    @if($request->status == 'Pending') bg-warning text-dark 
+                                    @elseif($request->status == 'Approved') bg-success 
+                                    @elseif($request->status == 'Rejected') bg-danger 
+                                    @endif">
+                                    {{ $request->status }}
+                                </span>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+</div>
+
+
 
     <!-- Footer -->
     <footer class="mt-4 text-center">

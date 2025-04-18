@@ -4,21 +4,19 @@ use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DepartmentController;
-
-
-
+use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\LeaveRequestController;
+use App\Http\Controllers\Auth\EmployeeAuthController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Show login form
-Route::get('/employee/login', function () {
-    return view('employeelogin');
-})->name('employee.login');
+// Show login form and login
+Route::get('/employee/login', [EmployeeAuthController::class, 'showLoginForm'])->name('employee.login');
+Route::post('/employee/login', [EmployeeAuthController::class, 'login'])->name('employee.login.submit');
+Route::get('/employee/dashboard', [EmployeeAuthController::class, 'dashboard'])->name('employee.dashboard');
 
-// Handle login form submission (to be created later)
-Route::post('/employee/login', [App\Http\Controllers\EmployeeLoginController::class, 'login'])->name('employee.login.submit');
 
 Route::get('/admin/admindashboard', function () {
     return view('admindashboard');
@@ -94,21 +92,38 @@ Route::get('/admin/salary-management', function () {
 
 
 // Leave Types
-Route::get('/admin/leave-types', function () {
-    return view('leave_types');
-})->name('admin.leave_types');
+// Route::get('/admin/leave-types', function () {
+//     return view('leave_types');
+// })->name('admin.leave_types');
+Route::get('/admin/leave-types', [LeaveController::class, 'index'])->name('admin.leave_types');
+
+
 // Leave Requests
-Route::get('/admin/leave-requests', function () {
-    return view('leave_requests');
-})->name('admin.leave_requests');
+// Route::get('/admin/leave-requests', function () {
+//     return view('leave_requests');
+// })->name('admin.leave_requests');
+
+
 //addleave
 Route::get('/admin/add-leave', function () {
     return view('addleave');
 })->name('admin.addleave');
+Route::post('/admin/store-leave', [LeaveController::class, 'store'])->name('admin.storeleave');
+
+
 //editleave
-Route::get('/admin/edit-leave', function () {
-    return view('editleave');
-})->name('admin.editleave');
+// Route::get('/admin/edit-leave', function () {
+//     return view('editleave');
+// })->name('admin.editleave');
+// Show edit form
+Route::get('/admin/edit-leave/{id}', [LeaveController::class, 'edit'])->name('admin.editleave');
+
+// Handle update (form submission)
+Route::post('/admin/update-leave/{id}', [LeaveController::class, 'update'])->name('admin.updateleave');
+
+// Handle delete
+Route::delete('/admin/delete-leave/{id}', [LeaveController::class, 'destroy'])->name('admin.deleteleave');
+
 
 
 // Reports
@@ -157,3 +172,11 @@ Route::get('/employee/logout', function(){
     Auth::logout();
     return redirect('login');
 })->name('employee.logout');
+
+
+//leave requets 
+Route::get('/employee/leave', [LeaveRequestController::class, 'create'])->name('employee.leave');
+Route::post('/employee/leave', [LeaveRequestController::class, 'store'])->name('employee.leave.store');
+
+Route::get('/admin/leave-requests', [LeaveRequestController::class, 'index'])->name('admin.leave_requests');
+

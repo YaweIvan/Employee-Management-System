@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="{{ asset('CSS/Employee.css') }}">
 
     <script src="{{ asset('JS/employee.js') }}" defer></script>
-
+     <style>
+        
+     </style>
 </head>
 
 <body>
@@ -54,10 +56,13 @@
 
             </div>
 
-            <form action="{{ route('employee.logout') }}" method="POST">
-                @csrf
-                <button class="btn" type="submit">Logout</button>
-            </form>
+            <a href="{{ url('/') }}" 
+   style="display: inline-block; padding: 10px 20px; background-color: #dc3545; color: white; font-weight: 600; border: none; border-radius: 8px; text-decoration: none; transition: background-color 0.3s ease;"
+   onmouseover="this.style.backgroundColor='#c82333'"
+   onmouseout="this.style.backgroundColor='#dc3545'">
+   Logout
+</a>
+
 
         </div>
 

@@ -222,53 +222,44 @@ html[data-bs-theme='dark'] .btn-danger:hover {
 
         <!-- Table for Leave Management -->
         <div class="table-responsive mt-4">
-            <table class="table table-bordered table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>SN</th>
-                        <th>Leave</th>
-                        <th>No of Days</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><button class="btn btn-info">Marriage leave</button></td>
-                        <td>10</td>
-                        <td>
-                            <select class="form-select">
-                                <option selected>Inactive</option>
-                                <option>Active</option>
-                                <option>Pending</option>
-                            </select>
-                        </td>
-                        <td>
-                        <a href="{{ route('admin.editleave') }}" class="btn btn-warning">✏️ Edit</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><button class="btn btn-info">Sick leave</button></td>
-                        <td>5</td>
-                        <td>
-                            <select class="form-select">
-                                <option>Inactive</option>
-                                <option selected>Active</option>
-                                <option>Pending</option>
-                            </select>
-                        </td>
-                        
-                        <td>
-                        <a href="{{ route('admin.editleave') }}" class="btn btn-warning">✏️ Edit</a>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>SN</th>
+                <th>Leave</th>
+                <th>No of Days</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($leaves as $index => $leave)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td><button class="btn btn-info">{{ $leave->leave_name }}</button></td>
+                    <td>{{ $leave->no_of_days }}</td>
+                    <td>
+                        <select class="form-select" disabled>
+                            <option {{ $leave->status == 'Inactive' ? 'selected' : '' }}>Inactive</option>
+                            <option {{ $leave->status == 'Active' ? 'selected' : '' }}>Active</option>
+                            <option {{ $leave->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                        </select>
+                    </td>
+                    <td>
+                        <a href="{{ route('admin.editleave', $leave->id) }}" class="btn btn-warning">✏️ Edit</a>
 
-                        </td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                </tbody>
-            </table>
-        </div>
+                        <form action="{{ route('admin.deleteleave', $leave->id) }}" method="POST" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this leave?')">🗑️ Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
 
     </div>
 

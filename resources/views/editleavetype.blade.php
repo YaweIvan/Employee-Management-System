@@ -36,62 +36,136 @@
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
-    .container {
-    max-width: 600px;
-    margin: auto;
-    background-color: #f8f9fa;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    /* Custom styling for the table container */
+.content {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background for the content */
+    border-radius: 10px;
+}
+
+/
+
+/* Footer styling */
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 10px 0;
+    margin-top: 30px;
+}
+
+footer p {
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 0;
+    margin-bottom: 20px;
+}
+
+.btn-add-leave {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-add-leave:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+  
+html[data-bs-theme='dark'] {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+html[data-bs-theme='dark'] .form-control {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border-color: #444;
+}
+
+html[data-bs-theme='dark'] .form-control::placeholder {
+    color: #cccccc;
+}
+
+html[data-bs-theme='dark'] .form-label {
+    color: #f1f1f1;
+}
+
+html[data-bs-theme='dark'] .card-section {
+    background-color: #1f1f1f;
+    border-color: #333;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+}
+
+html[data-bs-theme='dark'] #content {
+    background-color: #1c1c1c;
+    color: #ffffff;
+}
+
+html[data-bs-theme='dark'] .btn-success,
+html[data-bs-theme='dark'] .btn-danger {
+    color: #fff;
+    border: none;
+}
+
+html[data-bs-theme='dark'] .btn-success:hover,
+html[data-bs-theme='dark'] .btn-danger:hover {
+    filter: brightness(1.1);
+}
+
+/* Custom styling for the Edit Leave Type form */
+.container {
+    max-width: 800px; /* Limit the container width */
+    margin-top: 50px; /* Space at the top */
 }
 
 h3 {
-    text-align: center;
-    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: bold;
     color: #333;
+    margin-bottom: 20px;
+}
+
+form {
+    background-color: #f9f9f9; /* Light background for the form */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for the form */
 }
 
 .form-label {
-    font-weight: 600;
-    margin-bottom: 5px;
-    display: block;
+    font-weight: bold;
+    color: #444;
 }
 
 .form-control,
 .form-select {
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
-    font-size: 16px;
-}
-
-.form-control:focus,
-.form-select:focus {
-    border-color: #28a745;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
-}
-
-.d-flex {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
 }
 
 .btn {
-    padding: 10px 18px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
 }
 
 .btn-success {
     background-color: #28a745;
-    color: white;
+    border: none;
 }
 
 .btn-success:hover {
@@ -100,11 +174,15 @@ h3 {
 
 .btn-secondary {
     background-color: #6c757d;
-    color: white;
+    border: none;
 }
 
 .btn-secondary:hover {
     background-color: #5a6268;
+}
+
+.alert {
+    border-radius: 5px;
 }
 
 
@@ -123,65 +201,57 @@ h3 {
     <!-- Top Bar -->
     @include('topbar')
 
-    <a href="{{ route('admin.leave_types') }}" class="btn btn-success">
-    <i class="fas fa-arrow-left"></i> Go Back
-</a>
-    
-    <div class="container mt-5">
-    <h3 class="mb-4">Add New Leave</h3>
-    
+    <!-- Leave Management Section -->
+    <div class="container mt-4">
+        <h3>Edit Leave Type</h3>
 
+        <!-- Display Success or Error Message -->
         @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    <form action="{{ route('admin.storeleave') }}" method="POST">
-    @csrf
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @elseif(session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
 
-    <!-- Leave Name -->
-    <div class="mb-3">
-        <label for="leave_name" class="form-label">Leave Name</label>
-        <input type="text" class="form-control" id="leave_name" name="leave_name" placeholder="Enter leave name" required>
+        <!-- Edit Form -->
+        <form action="{{ route('admin.updateleave', $leave->id) }}" method="POST">
+            @csrf
+            <!-- Leave Name -->
+            <div class="mb-3">
+                <label for="leave_name" class="form-label">Leave Name</label>
+                <input type="text" class="form-control" id="leave_name" name="leave_name" value="{{ old('leave_name', $leave->leave_name) }}" required>
+            </div>
+
+            <!-- Number of Days -->
+            <div class="mb-3">
+                <label for="no_of_days" class="form-label">Number of Days</label>
+                <input type="number" class="form-control" id="no_of_days" name="no_of_days" value="{{ old('no_of_days', $leave->no_of_days) }}" required min="1">
+            </div>
+
+            <!-- Leave Status -->
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status" name="status" required>
+                    <option value="Active" {{ $leave->status == 'Active' ? 'selected' : '' }}>Active</option>
+                    <option value="Inactive" {{ $leave->status == 'Inactive' ? 'selected' : '' }}>Inactive</option>
+                    <option value="Pending" {{ $leave->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                </select>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">Update Leave</button>
+                <a href="{{ route('admin.leave_types') }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
     </div>
-
-    <!-- Number of Days -->
-    <div class="mb-3">
-        <label for="no_of_days" class="form-label">Number of Days</label>
-        <input type="number" class="form-control" id="no_of_days" name="no_of_days" placeholder="Enter number of days" min="1" required>
-    </div>
-
-    <!-- Leave Status -->
-    <div class="mb-4">
-        <label for="status" class="form-label">Status</label>
-        <select class="form-select" id="status" name="status" required>
-            <option value="" selected disabled>Select status</option>
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-            <option value="Pending">Pending</option>
-        </select>
-    </div>
-
-    <!-- Buttons -->
-    <div class="d-flex justify-content-between">
-        <button type="submit" class="btn btn-success">Add Leave</button>
-        <a href="#" class="btn btn-secondary">Cancel</a>
-    </div>
-</form>
-
+</div>
 
 
 </div>
 
-</div>
-
-   
     
-    <!-- Footer -->
-    <footer class="mt-4 text-center">
-        <p>© 2025 Employee Management System. All rights reserved.</p>
-    </footer>
 </div>
+
 
 
 

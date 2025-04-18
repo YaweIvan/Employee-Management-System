@@ -87,7 +87,7 @@ footer p {
     position: fixed;
     top: 0;
     left: 0;
-    width: 14rem;
+    width: 15rem;
     height: 100%;
     background: var(--sidebar-bg);
     display: flex;
@@ -202,7 +202,7 @@ footer p {
 .details {
     position: fixed;
     top: 10px;
-    width: 76.5%;
+    width: 78.5%;
     background: var(--topbar-bg);
     height: 5rem;
     border-radius: 10px;
@@ -634,9 +634,10 @@ footer p {
 .profile {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: flex-end;
     margin-right: 1.3rem;
-    margin-top: -2.2rem;
+    margin-top: 2.2rem;
 }
 
 .profile form {

@@ -20,63 +20,88 @@
 
 <body>
 
-@extends('employee');
+@extends('employee')
+<div class="leave">
+    <div class="details">
+        <a class="back" href="{{ route('employee.dashboard') }}">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+        <p class="bold">Leave Request</p>
+    </div>
 
-    <div class="leave">
-
-        <div class="details">
-            <a class="back" href="{{ route('employee.dashboard') }}">
-                <i class="bi bi-arrow-left"></i>
-            </a>
-            <p class="bold">Leave Request</p>
+    <div class="leave-form">
+        <div class="head">
+            <h3>Apply for leave</h3>
         </div>
 
-        <div class="leave-form">
+        <form method="POST" action="{{ route('employee.leave.store') }}" class="pop-form" id="leave-application-form">
+            @csrf
 
-            <div class="head">
-                <h3>Apply for leave</h3>
+            <!-- Employee Name (Hidden or Readonly) -->
+            <div class="mb-3">
+                <label for="employee_name" class="form-label">Employee Name</label>
+                <input type="text" name="employee_name" id="employee_name" class="form-control" value="{{ session('employee')->name }}" readonly required>
+            </div>
+            
+            @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+            <!-- Leave Type Dropdown -->
+            <div class="mb-3">
+                <label for="leave_type_id" class="form-label">Leave Type</label>
+                <select name="leave_type_id" class="form-select" id="leave_type_id" required>
+                    <option value="">Select Leave Type</option>
+                    @foreach($leaveTypes as $leave)
+                        <option value="{{ $leave->id }}" data-days="{{ $leave->no_of_days }}">
+                            {{ $leave->leave_name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
-            <form action="{{ route('employee.leave') }}" method="POST" class="pop-form" id="leave-application-form">
-                @csrf
-                <div class="form-select">
-                    <div class="select">
-                        <label for="category">Leave type </label>
-                        <select id="category" name="category" required>
-                            <option value="" disabled selected>Choose Leave type</option>
-                            <option value="Sick Leave">Sick Leave</option>
-                            <option value="Vacation">Vacation</option>
-                            <option value="Personal Leave">Personal Leave</option>
-                            <option value="Maternity/Paternity">Maternity/Paternity</option>
-                        </select>
-                    </div>
+            <!-- From Date -->
+            <div class="mb-3">
+                <label for="from_date" class="form-label">From</label>
+                <input type="date" name="from_date" id="from_date" class="form-control" required>
+            </div>
 
-                    <div class="input">
-                        <label for="submitted">Submitted On</label>
-                        <span>{{ $date ?? now()->format('D, d M Y')}}</span>
-                    </div>
-                </div>
-                <div class="input-wrapper">
-                    <span>
-                        <div class="input">
-                            <label for="fromDate">From</label>
-                            <input type="date" name="fromDate" id="fromDate" required>
-                        </div>
-                        <div class="input">
-                            <label for="toDate">To</label>
-                            <input type="date" name="toDate" id="toDate" required>
-                        </div>
-                    </span>
-                    <textarea id="leaveDescription" name="leaveDescription" placeholder="Write your leave description here..."></textarea>
-                </div>
+            <!-- To Date -->
+            <div class="mb-3">
+                <label for="to_date" class="form-label">To</label>
+                <input type="date" name="to_date" id="to_date" class="form-control" required>
+            </div>
 
-                <button type="submit" class="btn">
-                    Apply
-                    <span class="spinner"></span>
-                </button>
-            </form>
-        </div>
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">
+                Apply Leave
+                <span class="spinner"></span>
+            </button>
+        </form>
     </div>
+</div>
+
+<script>
+    document.getElementById('from_date').addEventListener('change', function () {
+        const startDate = new Date(this.value);
+        const leaveTypeSelect = document.getElementById('leave_type_id');
+        const selectedOption = leaveTypeSelect.options[leaveTypeSelect.selectedIndex];
+        const noOfDays = parseInt(selectedOption.getAttribute('data-days'));
+
+        if (!isNaN(startDate) && !isNaN(noOfDays)) {
+            const endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + noOfDays - 1); // Subtract 1 to include the start day
+
+            // Format the end date as YYYY-MM-DD
+            const formattedEndDate = endDate.toISOString().split('T')[0];
+            document.getElementById('to_date').value = formattedEndDate;
+        }
+    });
+</script>
+
+
 
 </body>
 

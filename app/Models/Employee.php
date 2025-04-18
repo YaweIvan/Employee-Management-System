@@ -18,5 +18,11 @@ class Employee extends Model
         'department',
         'role',
     ];
+
+
+    public function leaveRequests()
+{
+    return $this->hasMany(LeaveRequest::class);
+}
     
 }
