@@ -33,11 +33,11 @@
        <i class="fas fa-building me-2"></i> Departments
     </a>
 
-    <a href="{{ route('admin.leave_types') }}" class="{{ request()->routeIs('admin.leave_types') ? 'active' : '' }}">
+    <a href="{{ route('admin.leave_types') }}" class="{{ request()->routeIs('admin.leave_types') || request()->routeIs('admin.addleave') || request()->routeIs('admin.editleave') ? 'active' : '' }}">
         <i class="fas fa-suitcase me-2"></i> Leave Types
     </a>
 
-    <a href="{{ route('admin.employees') }}" class="{{ request()->routeIs('admin.employees') ? 'active' : '' }}">
+    <a href="{{ route('admin.employees') }}" class="{{ request()->routeIs('admin.employees') || request()->routeIs('admin.add_employee')|| request()->routeIs('admin.manageemployee') || request()->routeIs('admin.employee.edit') ? 'active' : '' }}">
         <i class="fas fa-users me-2"></i> Employees
     </a>
 
@@ -47,7 +47,7 @@
 
     <a href="{{ route('admin.leave_requests') }}" class="{{ request()->routeIs('admin.leave_requests') ? 'active' : '' }}">
         <i class="fas fa-file-alt me-2"></i> Leave Requests
-        <span class="badge bg-warning text-dark float-end">5</span>
+        <span class="badge bg-warning text-dark float-end"></span>
     </a>
 
     <a href="{{ route('admin.reports') }}" class="{{ request()->routeIs('admin.reports') ? 'active' : '' }}">

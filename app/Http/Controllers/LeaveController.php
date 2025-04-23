@@ -90,4 +90,28 @@ class LeaveController extends Controller
 
         return redirect()->route('admin.leave_types')->with('success', 'Leave deleted successfully.');
     }
+
+    // Update leave request status
+public function updateStatus(Request $request, $id)
+{
+    $request->validate([
+        'status' => 'required|in:Approved,Rejected,Pending', // ✅ include Pending
+    ]);
+
+    $leaveRequest = LeaveRequest::findOrFail($id);
+    $leaveRequest->status = $request->status;
+    $leaveRequest->save();
+
+    return redirect()->back()->with('success', 'Leave request status updated successfully.');
+}
+
+    //delete leave 
+    public function destroyLeave($id)
+{
+    $leaveRequest = LeaveRequest::findOrFail($id);
+    $leaveRequest->delete();
+
+    return redirect()->back()->with('success', 'Leave request deleted successfully.');
+}
+
 }

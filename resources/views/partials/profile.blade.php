@@ -13,48 +13,60 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
 
     @extends('employee')
+    <div class="profile p-4">
+    <div class="details mb-3">
+        <a class="back" href="{{ route('employee.dashboard') }}">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+    </div>
 
-    <div class="profile">
+    <h4 class="mb-3">Leave Requests</h4>
 
-        <div class="details">
-            <a class="back" href="{{ route('employee.dashboard') }}">
-                <i class="bi bi-arrow-left"></i>
-            </a>
-            <p class="bold">Attendence Records</p>
+    <div class="d-flex justify-content-center w-100">
+        <div class="table-responsive" style="min-width: 300px; max-width: 1000px;">
+            <table class="table table-bordered table-striped text-center m-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Leave Type</th>
+                        <th>From Date</th>
+                        <th>To Date</th>
+                        <th>Status</th>
+                        <th>Submitted On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($leaveRequests as $request)
+                        <tr>
+                            <td>{{ $request->leaveType->leave_name }}</td>
+                            <td>{{ $request->from_date }}</td>
+                            <td>{{ $request->to_date }}</td>
+                            <td>
+                                @if($request->status == 'Pending')
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                @elseif($request->status == 'Approved')
+                                    <span class="badge bg-success">Approved</span>
+                                @elseif($request->status == 'Rejected')
+                                    <span class="badge bg-danger">Rejected</span>
+                                @endif
+                            </td>
+                            <td>{{ $request->submitted_on }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+    </div>
+</div>
 
-        <form action="{{ route('employee.profile') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="form-wrapper">
-                <h3>Update Your Details</h3>
-                <div class="form-input">
-                    <input type="file" id="imageInput" name="image" hidden>
-                    <img src="{{ $user->profile_image ?? asset('images/icons8-user-96-(3).png') }}" class="img icon" id="imagePreview" alt="Profile Image">
-                    
-                    <div class="input-wrapper">
-                        <div class="input">
-                            <input type="password" name="current_password" placeholder="Current password" />
-                            <span class="eye"><i class="bi bi-eye"></i></span>
-                        </div>
-                        <div class="input">
-                            <input type="password" name="new_password" placeholder="New password" />
-                            <span class="eye"><i class="bi bi-eye"></i></span>
-                        </div>
-                        <div class="input">
-                            <input type="password" name="new_password_confirmation" placeholder="Confirm password" />
-                            <span class="eye"><i class="bi bi-eye"></i></span>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn" type="submit">Save changes</button>
-            </div>
-        </form>
+
+        
     </div>
 
 </body>

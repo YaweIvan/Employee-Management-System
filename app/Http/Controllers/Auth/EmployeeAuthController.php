@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Session;
 
+
+
+
 class EmployeeAuthController extends Controller
 {
     public function showLoginForm()
@@ -59,4 +62,9 @@ class EmployeeAuthController extends Controller
         session()->forget(['employee_logged_in', 'employee']);
         return redirect()->route('employee.login')->with('success', 'Logged out successfully.');
     }
+
+
+  
+
+    
 }

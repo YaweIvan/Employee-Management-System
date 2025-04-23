@@ -9,8 +9,11 @@ use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\Auth\EmployeeAuthController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\AttendanceController;
+use Illuminate\Http\Request;
 use App\Http\Controllers\ProfileController;
+
+
+// welcome page
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,6 +23,28 @@ Route::get('/employee/login', [EmployeeAuthController::class, 'showLoginForm'])-
 Route::post('/employee/login', [EmployeeAuthController::class, 'login'])->name('employee.login.submit');
 Route::get('/employee/dashboard', [EmployeeAuthController::class, 'dashboard'])->name('employee.dashboard');
 
+//admin login
+// Show the login page
+Route::get('/admin/login', function () {
+    return view('adminlogin');
+})->name('admin.login');
+
+// Handle login form submission
+Route::post('/admin/login', function (Request $request) {
+    $validEmail = 'yaweivan@gmail.com';
+    $validPassword = 'password123';
+
+    if (
+        $request->email === $validEmail &&
+        $request->password === $validPassword
+    ) {
+        session(['is_admin_logged_in' => true]);
+        return redirect()->route('admin.dashboard');
+    }
+
+    return redirect()->route('admin.login')->with('error', 'Invalid credentials.');
+})->name('admin.login.submit');
+
 
 //Route::get('/admin/admindashboard', function () {
     //return view('admindashboard');
@@ -27,7 +52,7 @@ Route::get('/employee/dashboard', [EmployeeAuthController::class, 'dashboard'])-
 
 // In web.php (routes/web.php)
 //Route::get('/admin/admindashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-Route::get('/admin/admindashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+ Route::get('/admin/admindashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 // Admin Dashboard
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboards');
@@ -134,6 +159,12 @@ Route::post('/admin/update-leave/{id}', [LeaveController::class, 'update'])->nam
 // Handle delete
 Route::delete('/admin/delete-leave/{id}', [LeaveController::class, 'destroy'])->name('admin.deleteleave');
 
+// leave status updates 
+Route::patch('/admin/leave-requests/{id}/status', [LeaveController::class, 'updateStatus'])->name('leave.updateStatus');
+
+//delete leave 
+Route::delete('/leave-requests/{id}', [LeaveController::class, 'destroyLeave'])->name('leave.destroy');
+
 
 
 // Reports
@@ -166,9 +197,12 @@ Route::get('/employee/dashboard', function(){
     return view('partials.dashboard');
 })->name('employee.dashboard');
 
-Route::get('/employee/profile', function(){
-    return view('partials.profile');
-})->name('employee.profile');
+// Route::get('/employee/profile', function(){
+//     return view('partials.profile');
+// })->name('employee.profile');
+Route::post('/employee/upload-image', [EmployeeController::class, 'uploadImage'])->name('employee.uploadImage');
+Route::get('/profile', [ProfileController::class, 'show'])->name('employee.profile');
+
 
 Route::get('/employee/leave', function (){
     return view('partials.leave');

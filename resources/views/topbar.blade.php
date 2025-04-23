@@ -15,13 +15,7 @@
         <div class="theme-switch" id="themeSwitch">
             <i class="fas fa-moon"></i>
         </div>
-        <img src="/api/placeholder/100/100" alt="Admin" class="profile-pic" id="profilePic">
-        <div class="profile-menu" id="profileMenu">
-            <<a href="{{ route('admin.profile') }}">
-    <i class="fas fa-user me-2"></i> Admin Profile
-</a>
+        <img src="{{ asset('images/bossminions.png') }}" alt="Admin" class="profile-pic" id="profilePic">
         
-    
-        </div>
     </div>
 </div>

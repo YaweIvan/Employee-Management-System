@@ -89,7 +89,7 @@
                 <div class="card-body">
                     <h5 class="card-title mb-3">Admin Panel</h5>
                     <p class="text-muted">Login to manage workforce and settings.</p>
-                    <a href="{{url('/admin/admindashboard')}}" class="btn btn-dark btn-custom">Admin Login</a>
+                    <a href="{{url('/admin/login')}}" class="btn btn-dark btn-custom">Admin Login</a>
                 </div>
             </div>
         </div>

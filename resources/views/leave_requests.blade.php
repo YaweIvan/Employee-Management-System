@@ -89,14 +89,45 @@
                             <td>{{ $request->to_date }}</td> <!-- Display to date -->
                             <td>{{ $request->submitted_on }}</td> <!-- Display submitted on date -->
                             <td>
-                                <span class="badge 
-                                    @if($request->status == 'Pending') bg-warning text-dark 
-                                    @elseif($request->status == 'Approved') bg-success 
-                                    @elseif($request->status == 'Rejected') bg-danger 
-                                    @endif">
-                                    {{ $request->status }}
-                                </span>
-                            </td>
+    @if($request->status == 'Pending')
+        <form method="POST" action="{{ route('leave.updateStatus', $request->id) }}" style="display:inline-block;">
+            @csrf
+            @method('PATCH')
+            <input type="hidden" name="status" value="Approved">
+            <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Are you sure you want to approve this request?')">Approve</button>
+        </form>
+        <form method="POST" action="{{ route('leave.updateStatus', $request->id) }}" style="display:inline-block; margin-left: 5px;">
+            @csrf
+            @method('PATCH')
+            <input type="hidden" name="status" value="Rejected">
+            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to reject this request?')">Reject</button>
+        </form>
+    @else
+        <span class="badge 
+            @if($request->status == 'Approved') bg-success
+            @elseif($request->status == 'Rejected') bg-danger
+            @endif">
+            {{ $request->status }}
+        </span>
+
+        <!-- Cancel button to revert back to Pending -->
+        <form method="POST" action="{{ route('leave.updateStatus', $request->id) }}" style="display:inline-block; margin-left: 5px;">
+            @csrf
+            @method('PATCH')
+            <input type="hidden" name="status" value="Pending">
+            <button type="submit" class="btn btn-secondary btn-sm" onclick="return confirm('Cancel this status and revert to Pending?')">Cancel</button>
+        </form>
+
+        <!-- Delete button -->
+        <form method="POST" action="{{ route('leave.destroy', $request->id) }}" style="display:inline-block; margin-left: 5px;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this leave request?')">Delete</button>
+        </form>
+    @endif
+</td>
+
+
                         </tr>
                     @endforeach
                 </tbody>

@@ -31,7 +31,7 @@
                 <img src="{{  $user->profile_image ?? asset('images/icons8-user-96.png')}}" id="previewImage" alt="">
                 <input type="file" name="" accept="image/*" style="display: none;" id="imageUpload">
             </span>
-            <p>{{$user->name ?? 'John Doe'}}</p>
+            <p>{{ session('employee')->name ?? 'John Doe' }}</p>
         </div>
 
         <div class="dashboard">
@@ -42,13 +42,15 @@
                     <span><i class="bi bi-speedometer2"></i></span> Dashboard
                 </a>
 
-                <a href="{{ route('employee.profile') }}" class="{{ request()->routeIs('employee.profile') ? 'active' : '' }}">
-                    <span><i class="bi bi-person-lines-fill"></i></span> Profile Update
-                </a>
+               
 
                 <a href="{{ route('employee.leave') }}" class="{{ request()->routeIs('employee.leave') ? 'active' : '' }}">
                     <span><i class="bi bi-pencil-square"></i></span> Leave Request
                 </a>
+                
+                <a href="{{ route('employee.profile') }}" class="{{ request()->routeIs('employee.profile') ? 'active' : '' }}">
+                    <span><i class="bi bi-person-lines-fill"></i></span> leaves Requested
+                </a> 
 
                 <a href="{{ route('employee.attendance') }}" class="{{ request()->routeIs('employee.attendaance')  ? 'active' : ''}}">
                     <span><i class="bi bi-card-checklist"></i></span> Attendance

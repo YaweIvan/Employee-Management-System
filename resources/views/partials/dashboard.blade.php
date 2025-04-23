@@ -22,7 +22,8 @@
     <div class="dashboard-d">
 
         <div class="details">
-            <p class="bold">Welcome back, <span class="name">{{$user->name ?? 'John'}}</span></p>
+        <p class="bold">Welcome back, <span class="name">{{ session('employee')->name ?? 'John' }}</span></p>
+
 
             <div class="detail-content">
                 <span class="date">{{ $date ?? now()->format('D, d M Y')}}</span>
@@ -37,12 +38,7 @@
                     <p>Dashboard</p>
                 </a>
             </div>
-            <div class="card bg-blue">
-                <a href="{{ route('employee.profile') }}" class="{{ request()->routeIs('employee.profile' ? 'active' : '') }}">
-                    <span><i class="bi bi-person-lines-fill"></i></span>
-                    <p>My Profile</p>
-                </a>
-            </div>
+           
             <div class="card bg-green" data-section="leave">
                 <a href="{{ route('employee.leave') }}" class="{{ request()->routeIs('employee.leave' ? 'active' : '') }}">
                     <span><i class="bi bi-card-list"></i></span>

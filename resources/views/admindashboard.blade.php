@@ -28,51 +28,58 @@
 
     <!-- Overview Cards -->
     <div class="row g-3">
-        <div class="col-md-4 col-sm-6">
-            <div class="card text-white bg-success h-100">
-                <div class="card-body d-flex justify-content-between align-items-center">
+    <!-- Registered Employees Card -->
+    <div class="col-md-4 col-sm-6">
+        <div class="card text-white bg-success h-100">
+            <div class="card-body d-flex justify-content-between align-items-center">
                 <div>
                     <h6 class="card-title">REGISTERED EMPLOYEES</h6>
                     <h4>{{ $employeeCount }}</h4> <!-- Dynamically display the employee count -->
                 </div>
-                    <i class="fas fa-users card-icon"></i>
-                </div>
-                <div class="card-footer bg-transparent border-0">
-                    <small><i class="fas fa-arrow-up me-1"></i> 1 new this month</small>
-                </div>
+                <i class="fas fa-users card-icon"></i>
             </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="card text-white bg-warning h-100">
-                <div class="card-body d-flex justify-content-between align-items-center">
-                    <div>
-                    <h6 class="card-title">LISTED DEPARTMENTS</h6>
-                    <h4>{{ $departmentCount }}</h4>
-                    </div>
-                    <i class="fas fa-building card-icon"></i>
-                </div>
-                <div class="card-footer bg-transparent border-0">
-                    <small>IT, HR, Finance, Marketing</small>
-                </div>
+            <div class="card-footer bg-transparent border-0">
+                <small><i class="fas fa-arrow-up me-1"></i> 1 new this month</small>
             </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="card text-white bg-danger h-100">
-                <div class="card-body d-flex justify-content-between align-items-center">
-                    <div>
-                    <h6 class="card-title">LISTED LEAVE TYPES</h6>
-                    <h4>{{ $leaveCount }}</h4>
-                    </div>
-                    <i class="fas fa-star card-icon"></i>
-                </div>
-                <div class="card-footer bg-transparent border-0">
-                    <small>Sick Leave, Vacation</small>
-                </div>
-            </div>
+            <a href="{{ route('admin.manageemployee') }}" class="stretched-link"></a> <!-- Link to Employee List -->
         </div>
     </div>
 
-    
+    <!-- Listed Departments Card -->
+    <div class="col-md-4 col-sm-6">
+        <div class="card text-white bg-warning h-100">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="card-title">LISTED DEPARTMENTS</h6>
+                    <h4>{{ $departmentCount }}</h4>
+                </div>
+                <i class="fas fa-building card-icon"></i>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+                <small>IT, HR, Finance, Marketing</small>
+            </div>
+            <a href="{{ route('admin.manage_department') }}" class="stretched-link"></a> <!-- Link to Departments -->
+        </div>
+    </div>
+
+    <!-- Listed Leave Types Card -->
+    <div class="col-md-4 col-sm-6">
+        <div class="card text-white bg-danger h-100">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="card-title">LISTED LEAVE TYPES</h6>
+                    <h4>{{ $leaveCount }}</h4>
+                </div>
+                <i class="fas fa-star card-icon"></i>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+                <small>Sick Leave, Vacation</small>
+            </div>
+            <a href="{{ route('admin.leave_types') }}" class="stretched-link"></a> <!-- Link to Leave Types -->
+        </div>
+    </div>
+</div>
+
 
     <!-- Quick Access Section -->
     <div class="card mt-4">
@@ -147,88 +154,8 @@
     </footer>
 </div>
 
-<<form id="profileForm" action="{{ route('profile.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <div class="text-center mb-4">
-        <img src="/api/placeholder/150/150" alt="Admin" class="rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
-        <div class="col-md-6 mb-3 mx-auto">
-            <label class="form-label">Add Image</label>
-            <input type="file" name="admin_image" class="form-control" accept="image/*">
-        </div>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Admin Name</label>
-        <input type="text" name="admin_name" class="form-control" value="Admin User">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input type="email" name="admin_email" class="form-control" value="admin@example.com">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Phone</label>
-        <input type="tel" name="admin_phone" class="form-control" value="+1 234 567 8900">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Role</label>
-        <input type="text" name="admin_role" class="form-control" value="System Administrator" readonly>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save Changes</button>
-    </div>
-</form>
 
-
-<!-- Settings Modal -->
-<div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="settingsModalLabel">System Settings</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h6>Appearance</h6>
-                <div class="mb-4">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="darkModeSwitch">
-                        <label class="form-check-label" for="darkModeSwitch">Dark Mode</label>
-                    </div>
-                </div>
-                
-                <h6>Notifications</h6>
-                <div class="mb-4">
-                    <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="emailNotif" checked>
-                        <label class="form-check-label" for="emailNotif">Email Notifications</label>
-                    </div>
-                    <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="leaveNotif" checked>
-                        <label class="form-check-label" for="leaveNotif">Leave Request Notifications</label>
-                    </div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="systemNotif" checked>
-                        <label class="form-check-label" for="systemNotif">System Notifications</label>
-                    </div>
-                </div>
-                
-                <h6>Security</h6>
-                <div class="mb-3">
-                    <button class="btn btn-sm btn-outline-primary mb-2">Change Password</button>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="twoFactor">
-                        <label class="form-check-label" for="twoFactor">Enable Two-Factor Authentication</label>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save Changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+               
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
