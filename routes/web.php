@@ -9,7 +9,8 @@ use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\Auth\EmployeeAuthController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\ProfileController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -29,7 +30,7 @@ Route::get('/employee/dashboard', [EmployeeAuthController::class, 'dashboard'])-
 Route::get('/admin/admindashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 // Admin Dashboard
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboards');
 
 // Departments
 Route::get('/admin/departments', function () {
@@ -173,9 +174,9 @@ Route::get('/employee/leave', function (){
     return view('partials.leave');
 })->name('employee.leave');
 
-Route::get('/employee/attendance', function(){
-    return view('partials.attendance');
-})->name('employee.attendance');
+//Route::get('/employee/attendance', function(){
+   // return view('partials.attendance');
+//})->name('employee.attendance');
 
 Route::get('/employee/logout', function(){
     Auth::logout();
@@ -191,3 +192,19 @@ Route::get('/admin/leave-requests', [LeaveRequestController::class, 'index'])->n
 
 Route::get('/salaries', [SalaryController::class, 'index'])->name('salaries.index');
 Route::post('/salaries', [SalaryController::class, 'store'])->name('salaries.store');
+
+
+
+
+Route::get('/employee/attendance', [AttendanceController::class, 'index'])
+    //->middleware(['auth'])
+    ->name('employee.attendance');
+    Route::post('/attendance/store', [AttendanceController::class, 'store'])->name('attendance.store');
+    Route::get('attendance/{attendance}/edit', [AttendanceController::class, 'edit'])->name('attendance.edit');
+Route::delete('attendance/{attendance}', [AttendanceController::class, 'destroy'])->name('attendance.destroy');
+Route::put('attendance/{attendance}', [AttendanceController::class, 'update'])->name('attendance.update');
+
+
+Route::post('/profile/store', [ProfileController::class, 'store'])->name('profile.store');
+
+Route::get('/admin/profile', [ProfileController::class, 'show'])->name('admin.profile');

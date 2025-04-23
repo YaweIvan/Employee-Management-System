@@ -147,48 +147,37 @@
     </footer>
 </div>
 
-<!-- Modals -->
-<!-- Profile Modal -->
-<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="profileModalLabel">Admin Profile</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="text-center mb-4">
-                    <img src="/api/placeholder/150/150" alt="Admin" class="rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
-                    <div class="mt-2">
-                        <button class="btn btn-sm btn-primary">Change Photo</button>
-                    </div>
-                </div>
-                <form>
-                    <div class="mb-3">
-                        <label for="fullName" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="fullName" value="Admin User">
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" value="admin@example.com">
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Phone</label>
-                        <input type="tel" class="form-control" id="phone" value="+1 234 567 8900">
-                    </div>
-                    <div class="mb-3">
-                        <label for="role" class="form-label">Role</label>
-                        <input type="text" class="form-control" id="role" value="System Administrator" disabled>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save Changes</button>
-            </div>
+<<form id="profileForm" action="{{ route('profile.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="text-center mb-4">
+        <img src="/api/placeholder/150/150" alt="Admin" class="rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+        <div class="col-md-6 mb-3 mx-auto">
+            <label class="form-label">Add Image</label>
+            <input type="file" name="admin_image" class="form-control" accept="image/*">
         </div>
     </div>
-</div>
+    <div class="mb-3">
+        <label class="form-label">Admin Name</label>
+        <input type="text" name="admin_name" class="form-control" value="Admin User">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" name="admin_email" class="form-control" value="admin@example.com">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input type="tel" name="admin_phone" class="form-control" value="+1 234 567 8900">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Role</label>
+        <input type="text" name="admin_role" class="form-control" value="System Administrator" readonly>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+</form>
+
 
 <!-- Settings Modal -->
 <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">

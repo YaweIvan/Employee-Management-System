@@ -24,7 +24,7 @@
         <small>System Administrator</small>
     </div>
 
-    <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+    <a href="{{ route('admin.dashboards') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
         <i class="fas fa-tachometer-alt me-2"></i> Dashboard
     </a>
 
