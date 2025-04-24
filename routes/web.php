@@ -11,6 +11,7 @@ use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AttendanceController;
 
 
 // welcome page
@@ -189,9 +190,6 @@ Route::get('/admin/employees/search', [EmployeeController::class, 'search'])->na
 
 
 //hillarries
-
-
-
 
 Route::get('/employee/dashboard', function(){
     return view('partials.dashboard');

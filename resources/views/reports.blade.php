@@ -66,7 +66,7 @@
             <div class="col-md-4">
                 <div class="card shadow-sm text-center">
                     <div class="card-body">
-                        <h5 class="card-title">Attendance Issues</h5>
+                        <h5 class="card-title">Total Department</h5>
                         <p class="display-6 text-danger">8</p>
                     </div>
                 </div>
